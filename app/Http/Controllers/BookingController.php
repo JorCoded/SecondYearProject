@@ -46,11 +46,13 @@ class BookingController extends Controller
             ->pluck('room_type.basePrice') // Get the prices for the first n rooms
             ->sum(); // Sum the prices in the collection
 
-        //$startDate = ;
+        $startDate = explode('-' ,$request->startDate)[2];
+        $endDate = explode('-' ,$request->endDate)[2];
         //$endDate = ;
-        $duration = $request->endDate - $request->startDate;
+        //$duration = $endDate - $startDate;
+        $duration = explode('-' ,$request->startDate)[2] - explode('-' ,$request->endDate)[2];
 
-        return view('test', ['price' => $price, 'startDate'=>$request->startDate, 'endDate'=>$request->endDate, 'duration'=>$duration/*, 'rooms'=>$rooms ->basePrice */]);
+        return view('test', ['price' => $price, 'startDate'=>$startDate, 'endDate'=>$endDate, 'duration'=>$duration/*, 'rooms'=>$rooms ->basePrice */]);
     }
 
 
@@ -95,8 +97,9 @@ class BookingController extends Controller
             ->limit($bookingRequest->numOfRooms)
             ->pluck('room_type.basePrice') // Get the prices for the first n rooms
             ->sum();
+        $duration = explode('-' ,$bookingRequest->startDate)[2] - explode('-' ,$bookingRequest->endDate)[2];
 
-        return view('paymentForm', ['bookingRequest' => $bookingRequest, 'totalPrice' => $totalPrice, $hotelid, $custid/* ->basePrice */]);
+        return view('paymentForm', ['bookingRequest' => $bookingRequest, 'totalPrice' => $totalPrice, $hotelid, $custid, $duration/* ->basePrice */]);
     }
 
     public function processPayment(Request $request)
