@@ -1,0 +1,12 @@
+--SELECT * FROM room WHERE id = 1 ORDER BY id;
+--ALTER TABLE customer ALTER COLUMN logTime timestamp without time zone[] NULL;
+--ALTER TABLE booking ALTER COLUMN "roomid" TYPE int[];
+--ALTER TABLE booking_details ADD COLUMN bookingReceipt text[];
+--ALTER TABLE booking_details ADD CONSTRAINT FK_booking_details_room FOREIGN KEY (roomid) REFERENCES room(id);
+--ALTER TABLE staff DROP COLUMN "credCardNum";
+--ALTER TABLE booking_details RENAME COLUMN "id" TO "bookingid";
+--ALTER TABLE hotels RENAME TO "hotel";
+--ALTER TABLE customer ADD CONSTRAINT unique_customer_email UNIQUE (email)
+--TRUNCATE TABLE public.room RESTART IDENTITY CASCADE
+--UPDATE room SET "isAvailable" = true;
+--select * from room where hotelid = 1 AND  "isAvailable"= FALSE AND typeid = 1 order by id limit 2
