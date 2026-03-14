@@ -36,8 +36,9 @@
     ];
 
     $lists=[];
-
+    $str = "";
+    explode($str,"-");
     array_push($lists, [$list["key1"]="val2", $list["key2"]="val2"]);
-
+    
     array_pop($list)
 ?>

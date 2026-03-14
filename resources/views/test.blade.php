@@ -20,10 +20,10 @@
     @endfor --}}
 
     {{$price}}<br>
-    {{$startDate}}<br>
-    {{$endDate}}<br>
-    {{$duration}}<br>
-    {{-- @dd($rooms) --}}
+    {{-- {{$startDate}}<br>
+    {{$endDate}}<br>--}}
+    {{$duration}}<br> 
+    @dd($startDate, $endDate)
 
     <form action="" method="post">
 

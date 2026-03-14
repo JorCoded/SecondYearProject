@@ -46,6 +46,8 @@ class BookingController extends Controller
             ->pluck('room_type.basePrice') // Get the prices for the first n rooms
             ->sum(); // Sum the prices in the collection
 
+        //$startDate = ;
+        //$endDate = ;
         $duration = $request->endDate - $request->startDate;
 
         return view('test', ['price' => $price, 'startDate'=>$request->startDate, 'endDate'=>$request->endDate, 'duration'=>$duration/*, 'rooms'=>$rooms ->basePrice */]);
