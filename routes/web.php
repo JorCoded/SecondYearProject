@@ -53,10 +53,17 @@ Route::post('/signIn', [UserController::class, 'signIn'])
 Route::get('/logout', [UserController::class, 'logOut'])
 ->name('logout');
 
-Route::post('/book', [BookingController::class, 'testBooking'])
-->name('testBooking');
+//Opens up the bookingForm page
+Route::get('/book/{hotelid}', [BookingController::class, 'book'])
+->name('book');
 // Route::get('/book/{hotelid?}', [BookingController::class, 'processBooking'])
 // ->name('testBooking');
+
+Route::get('/form/{hotelid}/{custid}', [BookingController::class, 'getDetails'])
+->name('getDetails');
+
+Route::post('/payment/{bookingRequest}/{hotelid}/{custid}', [BookingController::class, 'processPayment'])
+->name('displayPayment');
 
 Route::view('/test', 'test')
 ->name('test');

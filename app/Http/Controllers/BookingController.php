@@ -19,9 +19,9 @@ class BookingController extends Controller
         return view('bookings', ['bookings' => $bookings]);
     }
 
-    public function addBooking(Request $request)
+    public function book(?int $hotelid=1)
     {
-        return view('bookingForm');
+        return view('bookingForm', ['hotelid' => $hotelid]);
     }
 
     public function testBooking(Request $request)
@@ -56,7 +56,7 @@ class BookingController extends Controller
     }
 
 
-    public function getDetails(Request $request)
+    public function getDetails(Request $request, ?int $hotelid = 1, ?int $custid = 1)
     {
         //1. Capture booking details from 'hotels'
         //form must contain number of rooms
@@ -78,11 +78,11 @@ class BookingController extends Controller
 
         //$request->startDate = 
 
-        if (!($this->checkInventory(/* $hotelid, (int) $request->amountOfPeople */))) {
+        if (!($this->checkInventory($hotelid, (int) $request->amountOfPeople))) {
             return redirect()->route('hotels')->with('status', 'No rooms available. Please try another day.');
         }
 
-        return $this->displayPayment($request);
+        return $this->displayPayment($request,$hotelid,$custid);
     }
 
 
@@ -99,17 +99,17 @@ class BookingController extends Controller
             ->sum();
         $duration = explode('-' ,$bookingRequest->startDate)[2] - explode('-' ,$bookingRequest->endDate)[2];
 
-        return view('paymentForm', ['bookingRequest' => $bookingRequest, 'totalPrice' => $totalPrice, $hotelid, $custid, $duration/* ->basePrice */]);
+        return view('paymentForm', ['bookingRequest' => $bookingRequest, 'totalPrice' => $totalPrice, $hotelid, $duration/* ->basePrice */]);
     }
 
-    public function processPayment(Request $request)
+    public function processPayment(Request $request, $hotelid=1, $custid = 1)
     {
         //3. Process the payment, if everything is valid then processBooking
         //If payment is successful then processBooking
         //Since not using payment portal or payment logic, a placeholder will be used
 
         if (true)
-            $this->processBooking($request);
+            $this->processBooking($request, $hotelid, $custid);
 
         //return redirect()->route('bookings');
     }

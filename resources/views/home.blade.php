@@ -3,7 +3,7 @@
 
     <h1>Home</h1>
 
-    {{-- @if(Auth::guard('customer')->check() || Auth::guard('staff')->check())
+    {{-- @if (Auth::guard('customer')->check() || Auth::guard('staff')->check())
      Hello {{ Auth::guard('staff')->user()->firstname}} 
      <br><a href="{{ route('logout')}}">Log out</a>
 
@@ -31,38 +31,36 @@
 
 
 
-    @if (Auth::guard('staff')->check())
-        Hello {{$user->firstname}}
+    @auth('staff')
+        Hello {{ auth()->guard('staff')->user()->firstname }}
 
-        @if ($user->is_admin)
-            <br><a href="{{ route('dashboard') }}">Dashboard</a>
+        @if (auth()->guard('staff')->user()->is_admin)
+            <br><a href="{{ route('dashboard') }}">Dashboard</a><br>
         @endif
 
-        <a href="{{ route('hotels')}}">Hotels</a><br>
-        
-        <br><a href="{{ route('logout')}}">Log out</a>
-    
-    @elseif (Auth::guard('customer')->check())
-        <h1>Customer</h1>
-        Hello {{$user->firstname}}
-        <a href="{{ route('hotels')}}">Hotels</a><br>
-        <br><a href="{{ route('logout')}}">Log out</a>
+        <a href="{{ route('hotels') }}">Hotels</a><br>
 
+        <br><a href="{{ route('logout') }}">Log out</a>
+    @elseauth('customer')
+        <h1>Customer</h1>
+        Hello {{ auth()->guard('customer')->user()->firstname }}
+        <a href="{{ route('hotels') }}">Hotels</a><br>
+        <br><a href="{{ route('logout') }}">Log out</a>
     @else
         <h1>Guest</h1>
         <br><a href="{{ route('signin') }}">Sign In</a><br>
-    @endif
+    @endauth
     {{-- <br><a href="{{ route('signin') }}">Sign In</a><br> --}}
 
-    <form action="{{route('testBooking')}}" method="post">
+    <form action="{{ route('testBooking') }}" method="post">
         @csrf
         <label for="startDate">Start Date</label>
         <input type="date" name="startDate" id="startDate">
 
         <label for="endDate">End Date</label>
-        <input type="date" name="endDate" id="endDate"/>
+        <input type="date" name="endDate" id="endDate" />
 
         <button type="submit">Submit</button>
     </form>
-    
+
 </x-components.common-layout>
