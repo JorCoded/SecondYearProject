@@ -3,9 +3,9 @@
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HotelController;
-//use App\Http\Controllers\RoomController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'dashboard')
@@ -65,10 +65,15 @@ Route::get('/form/{hotelid}/{custid}', [BookingController::class, 'getDetails'])
 Route::post('/payment/{bookingRequest}/{hotelid}/{custid}', [BookingController::class, 'processPayment'])
 ->name('displayPayment');
 
-Route::view('/test', 'test')
+Route::get('/test/{hotelid}', [BookingController::class, 'test'])
 ->name('test');
+
+Route::view('/app', 'layouts/app')->name('app');
 
 Route::get('post/{id}', function($id){
     return view('test',['id' => $id]);
 });
 #Route::post('/test1/{hotelid})
+Auth::routes();
+
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -12,6 +12,17 @@ class BookingController extends Controller
 {
     use BookRooms;
 
+    public function test($hotelid){
+
+        $inventory = [
+            'Basic'=> $this->checkInventory($hotelid, 1),
+            'Couple'=> $this->checkInventory($hotelid, 2),
+            'Family'=> $this->checkInventory($hotelid, 3),
+            'Deluxe'=> $this->checkInventory($hotelid, 4),
+            ];
+        return view('test', ['inventory' => $inventory]);
+    }
+
 
     public function index()
     {
@@ -78,7 +89,7 @@ class BookingController extends Controller
 
         //$request->startDate = 
 
-        if (!($this->checkInventory($hotelid, (int) $request->amountOfPeople))) {
+        if (($this->checkInventory($hotelid, (int) $request->amountOfPeople))<1) {
             return redirect()->route('hotels')->with('status', 'No rooms available. Please try another day.');
         }
 

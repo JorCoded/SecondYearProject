@@ -1,8 +1,48 @@
 <x-components.common-layout>
+    {{-- @inject('bookRooms', 'App\BookRooms') --}}
     <h3><a href="{{ route('home') }}">Home</a></h3>
     <h3><a href="{{ route('dashboard') }}">Dashboard</a></h3>
-    <h3><a href="{{ route('testBooking') }}">Test Booking</a></h3>
+    {{-- <h3><a href="{{ route('testBooking') }}">Test Booking</a></h3><br><br> --}}
     {{-- <h3><a href="{{ route('testBooking', ['hotelid' => 1]) }}">Test Booking</a></h3> --}}
+
+    
+    {{ $inventory['Basic'] }}
+    
+    {{-- @dd($inventory) --}}
+
+    <div class="roomTypeCard">
+        <div class="typeName">
+            <h3>Basic Room</h3>
+            <p id="commodities">
+
+            </p>
+        </div>
+
+        <div class="numOfGuests">
+            <p>1 Adult</p>
+        </div>
+        
+        <div class="price">
+            
+        </div>
+        
+        <div class="numOfRooms">
+            
+        </div>
+
+    </div>
+    <div class="roomTypeCard">
+
+    </div>
+    <div class="roomTypeCard">
+
+    </div>
+    <div class="roomTypeCard">
+
+    </div>
+
+
+
 
 
     {{-- <h2>{{$id}}</h2> --}}
@@ -19,11 +59,13 @@
         <br>
     @endfor --}}
 
-    {{$price}}<br>
-    {{-- {{$startDate}}<br>
-    {{$endDate}}<br>--}}
+    {{--{{$price}}<br>
+     {{$startDate}}<br>
+    {{$endDate}}<br>
     {{$duration}}<br> 
-    @dd($startDate, $endDate)
+    @dd($startDate, $endDate)--}}
+
+
 
     <form action="" method="post">
 

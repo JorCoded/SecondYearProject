@@ -17,7 +17,7 @@ trait BookRooms
         $count = $inventory;
         
         //return view('test', ['inventory' => $inventory, 'flag' => $count<5?false:true]);
-        return $count<5?false:true;
+        return $count/* <5?false:true */;
     }
 
     public function changeAvailability(?int $hotelid = 1,$rooms=[],?int $typeid=1){
@@ -148,5 +148,8 @@ trait BookRooms
         return ;
     }
 
+    public function test(){
+        return "test Success";
+    }
 
 }

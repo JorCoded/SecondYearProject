@@ -58,7 +58,7 @@ class UserController extends Controller
             'password' => 'required|string|max:200|min:6'
         ]);
 
-        $credentials = $request->only('email', 'password');
+        //$credentials = $request->only('email', 'password');
         $customer = Customer::where('email', $request->email)->first();
         $staff = Staff::where('email', $request->email)->first();
 
@@ -150,4 +150,11 @@ class UserController extends Controller
         Auth::logout();
         return redirect()->route('home')->with('status', 'Logged out successfully.');
     }
+
+
+
+
+
+
+    
 }

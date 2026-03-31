@@ -17,7 +17,8 @@
             <option value="4">Deluxe (Couple)</option>
         </select>
 
-        <table>
+
+        {{-- <table>
             <thead>
                 <tr>
                     <th>Room Type</th>
@@ -27,36 +28,105 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <tr id="trBasic">
                     <td>
                         <div>
+                            <h3>Basic Room</h3>
+                            
                         </div>
                     </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>
+                        <div>
+                            
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            
+                        </div>
+                    </td>
+                    <td>
+                        
+                        <div>
+                            
+                        </div>
+                    </td>
                 </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+
+                <tr id="trCouple">
+                    <td>
+                        <div>
+
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            
+                        </div>
+                    </td>
+                    <td>
+                        
+                        <div>
+                            
+                        </div>
+                    </td>
                 </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                
+                <tr id="trFamily">
+                    <td>
+                        <div>
+
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            
+                        </div>
+                    </td>
+                    <td>
+                        
+                        <div>
+                            
+                        </div>
+                    </td>
                 </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                
+                <tr id="trDeluxe">
+                    <td>
+                        <div>
+
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            
+                        </div>
+                    </td>
+                    <td>
+                        
+                        <div>
+                            
+                        </div>
+                    </td>
                 </tr>
                 
             </tbody>
-        </table>
+        </table> --}}
 
         <label for="numOfRooms">How many rooms do you want?</label>
         <!-- <input type="number" name="numOfRooms" id="numberOfRooms"> -->

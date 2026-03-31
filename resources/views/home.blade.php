@@ -32,6 +32,7 @@
 
 
     @auth('staff')
+        <h4>Staff</h4>
         Hello {{ auth()->guard('staff')->user()->firstname }}
 
         @if (auth()->guard('staff')->user()->is_admin)
@@ -47,12 +48,12 @@
         <a href="{{ route('hotels') }}">Hotels</a><br>
         <br><a href="{{ route('logout') }}">Log out</a>
     @else
-        <h1>Guest</h1>
-        <br><a href="{{ route('signin') }}">Sign In</a><br>
+        <h1 class="">Guest</h1>
+        <br><a href="{{ route('login') }}">Sign In</a><br>
     @endauth
     {{-- <br><a href="{{ route('signin') }}">Sign In</a><br> --}}
 
-    <form action="{{ route('testBooking') }}" method="post">
+    {{-- <form action="{{ route('testBooking') }}" method="post">
         @csrf
         <label for="startDate">Start Date</label>
         <input type="date" name="startDate" id="startDate">
@@ -61,6 +62,6 @@
         <input type="date" name="endDate" id="endDate" />
 
         <button type="submit">Submit</button>
-    </form>
+    </form> --}}
 
 </x-components.common-layout>
