@@ -1,0 +1,175 @@
+body{
+    background: #dadee6;
+background: linear-gradient(45deg, rgb(242, 241, 241) 20%, rgb(189, 189, 189) 45%, rgb(255, 255, 255) 100%);
+}
+.custom-grey{
+    background-color: rgb(38, 38, 40) !important;
+    color: white;
+}
+.white{
+    background-color: white !important;
+}
+.rounded-border{
+    border-radius: 50px !important;
+}
+.main-bg{
+    background-color: rgb(205, 205, 205) !important;
+}
+/* #hotels-list:hover::after{
+    background-color: rgb(38, 38, 40) !important;
+    color: white !important;
+    border-radius: 50px !important;
+}
+#hotels-list{
+    position: relative;
+    text-decoration: none;
+}
+#hotels-list::after{
+    content: "";
+    background-color: rgb(38, 38, 40) !important;
+    position: absolute;
+    visibility: hidden;
+    width: 100%; /* Starts with no width 
+    height: 26px;
+    bottom: 0;
+    left: 0;
+    transition: width 0.3s ease;
+    color: white !important;
+    border-radius: 50px !important;
+}
+#hotels-list:hover::after{
+    width: 100%;
+    visibility: visible;
+} */
+#destination-link{
+    border-radius: 50px !important;
+}
+#destination-link:hover{
+    background-color: rgb(38, 38, 40) !important;
+    color: white !important;
+}
+
+#hotels-link{
+    border-radius: 50px !important;
+}
+#hotels-link:hover{
+    background-color: rgb(38, 38, 40) !important;
+    color: white !important;
+}
+
+#currency-link{
+    border-radius: 50px !important;
+}
+#currency-link:hover{
+    background-color: rgb(38, 38, 40) !important;
+    color: white !important;
+}
+
+#login-link{
+    border-radius: 50px !important;
+}
+#login-link:hover{
+    background-color: rgb(38, 38, 40) !important;
+    color: white !important;
+}
+.dropdown-item{
+    border-radius: 50px !important;
+}
+.dropdown-item:hover{
+    background-color: rgb(38, 38, 40) !important;
+    color: white !important;
+    border-radius: 50px !important;
+}
+
+#profile-pic{
+    position: relative;
+    left: 1390px;
+    top: 5px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+
+}
+
+
+
+@media screen and (min-width: 320px) and (max-width: 991px) {
+
+    #hotels-link:active{
+        background-color: rgb(38, 38, 40) !important;
+    color: white !important;
+    border-radius: 50px !important;
+    }
+
+    #destination-link:active{
+        background-color: rgb(38, 38, 40) !important;
+    color: white !important;
+    border-radius: 50px !important;
+    }
+
+    #currency-link:active{
+        background-color: rgb(38, 38, 40) !important;
+    color: white !important;
+    border-radius: 50px !important;
+    }
+
+    .dropdown-item:active{
+        background-color: rgb(38, 38, 40) !important;
+    color: white !important;
+    border-radius: 50px !important;
+    }
+
+    #login-link:active{
+        background-color: rgb(38, 38, 40) !important;
+        color: white !important;
+        border-radius: 50px !important;
+    }
+
+    #profile-pic{
+        position: relative;
+        left: 0px;
+        width: 50px;
+        height: 50px;
+        justify-content: center;
+        margin-right: 20px !important;
+    }
+
+    .navbar{
+        width:70% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        margin-top: 5px;
+        background-color: rgb(221, 230, 230) !important;
+        border-radius: 50px;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        /* height: 50px; */
+    }
+
+    #brand{
+        margin-right: 10px !important;
+    }
+
+    .navbar-nav{
+       position: relative !important;
+       left: auto !important;
+       border-radius: 20px !important;
+       margin-top: 10px;
+    }
+    .nav-item>a{
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        margin-top: 2px;
+        margin-bottom: 2px;
+        width: max-content;
+       
+    }
+    #search-form{
+        margin-top: 10px;
+    }
+}
+
+/* 
+@media screen and (min-width:1536px) {
+    
+} */
