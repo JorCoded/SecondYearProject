@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use DateTime;
+use App\Models\Customer;
 use App\Models\Staff;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use PhpParser\Node\Stmt\TryCatch;
 
 class StaffController extends Controller
 {
@@ -48,4 +50,44 @@ class StaffController extends Controller
 
         return redirect()->route('users');
     }
+
+
+    public function makeAdmin($userEmail){
+        $staff = Staff::where('email', $userEmail)->first();
+        $staff->is_admin = 1;
+        $staff->save();
+        return redirect()->route('users')->with("adminChanged", "Staff was made an admin successfully.");
+    }
+
+    public function removeAdmin($userEmail){
+        $staff = Staff::where('email', $userEmail)->first();
+        $staff->is_admin = 0;
+        $staff->save();
+        return redirect()->route('users')->with("adminChanged", "Staff was removed as admin successfully.");
+    }
+
+    public function deleteStaff($userEmail){
+        $staff = Staff::where('email', $userEmail)->first();
+        $staff->delete();
+        return redirect()->route('users')->with("staffDeleted", "Staff was deleted successfully.");
+    }
+
+    
+
+    /* public function changePassword($isStaff, $userEmail, $newPassword){
+
+
+
+        if ($isStaff) {
+            $user = Staff::where('email', $userEmail)->first();
+            $user->password = $newPassword.Staff::$pattern;
+        }else{
+            $user = Customer::where('email', $userEmail)->first();
+            $user->password = $newPassword;
+        }
+        
+        $user->save();
+        return redirect()->route('users')->with("passwordChanged", "Password was changed successfully.");
+    } */
+
 }

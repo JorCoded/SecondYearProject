@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use Laravel\Scout\Searchable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableInterface;
 
 class Customer extends Authenticatable implements AuthenticatableInterface
 {
+    use Searchable;
+
     protected $table = 'customer';
 
     protected $fillable = [
@@ -27,4 +30,17 @@ class Customer extends Authenticatable implements AuthenticatableInterface
             'password' => 'hashed'
         ];
     }
+
+    public function toSearchableArray()
+    {
+        return [
+            'firstname' => $this->firstname,
+            'lastname' => $this->lastname,
+            'email' => $this->email
+        ];
+    }
+
+
+
+
 }

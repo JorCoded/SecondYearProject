@@ -64,4 +64,52 @@
         <button type="submit">Submit</button>
     </form> --}}
 
+
+    <div id="landing-page-img">
+        <div id="landing-page-img1"></div>
+        <div id="landing-page-img2"></div>
+        <div id="landing-page-img3"></div>
+    </div>
+
+    <div id="welcome-msg">
+        <h1>Welcome to "website name"</h1>
+        <h2></h2>
+        <p></p>
+    </div>
+
+    <div id="side-navbar">
+        <ul>
+            <li><a href="#">Destination</a></li>
+            <li><a href="#">Start Date</a></li>
+            <li><a href="#">End Date</a></li>
+            <li><a href="#">Guests</a></li>
+        </ul>
+    </div>
+
+
+    <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="..." class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="..." class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="..." class="d-block w-100" alt="...">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+
 </x-components.common-layout>

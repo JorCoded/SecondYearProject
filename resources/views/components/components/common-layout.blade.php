@@ -1526,7 +1526,7 @@
 
             {{-- <div id="search-bar-div" class="col">
                     <div id="search-bar" class="">
-                        <form action="post" class="">
+                        <form action="post" class="">/* wire:model.live.debounce.300ms="query" */
                         <input type="text" name="searchBar" id="" />
                         <button type="submit"><img src="searchIcon.png" alt="" /><img src="" alt=""></button>
                         </form>

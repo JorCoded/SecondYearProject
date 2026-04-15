@@ -12,7 +12,7 @@
                 <h2>{{ $hotel->hotel_name }}</h2>
                 <p>{{ $hotel->description }}</p>
                 <p>{{ $hotel->picture }}</p>
-                <a href="{{route('/book',['hotelid' => $hotel->id])}}">Book</a>
+                {{-- <a href="{{route('/book',['hotelid' => $hotel->id])}}">Book</a> --}}
             </div><br>
         @endforeach
     </div>

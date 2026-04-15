@@ -151,7 +151,7 @@ class UserController extends Controller
         return redirect()->route('home')->with('status', 'Logged out successfully.');
     }
 
-
+    
 
 
 
