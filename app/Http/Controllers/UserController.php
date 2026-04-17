@@ -35,6 +35,7 @@ class UserController extends Controller
         // Auth::user() defaults to the 'web' guard. Since you are using 'customer' and 'staff' guards,
         // you need to explicitly retrieve the user from the active guard.
         $user = Auth::guard('customer')->user() ?? Auth::guard('staff')->user();
+        
 
         return view('home', ['user' => $user]);
     }

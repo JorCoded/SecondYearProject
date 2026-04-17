@@ -1,4 +1,5 @@
---SELECT * FROM room WHERE id = 1 ORDER BY id;
+SELECT * FROM hotel;
+--SELECT DISTINCT location FROM hotel;
 --ALTER TABLE customer ALTER COLUMN logTime timestamp without time zone[] NULL;
 --ALTER TABLE booking ALTER COLUMN "roomid" TYPE int[];
 --ALTER TABLE booking_details ADD COLUMN bookingReceipt text[];

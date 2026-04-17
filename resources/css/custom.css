@@ -2,6 +2,11 @@ body{
     background: #dadee6;
 background: linear-gradient(45deg, rgb(242, 241, 241) 20%, rgb(189, 189, 189) 45%, rgb(255, 255, 255) 100%);
 }
+main{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
 .custom-grey{
     background-color: rgb(38, 38, 40) !important;
     color: white;
@@ -91,10 +96,102 @@ background: linear-gradient(45deg, rgb(242, 241, 241) 20%, rgb(189, 189, 189) 45
 
 }
 
+#carouselExampleAutoplaying{
+    position: relative;
+    /* left: 570px; */
+    bottom: 60px;
+    margin-left: 40%;
+    margin-right: auto;
+    margin-bottom: 40px;
+    width: 490px;
+}
+
+.card{
+    height: 220px;
+    border-radius: 10%;
+}
+
+#previous-btn{
+    /* position: relative; */
+    margin-right: 0px;
+}
+
+#side-navbar{
+    position: relative;
+    left: 200px;
+    top: 220px;
+    width: 160px;
+    margin-bottom: 40px;
+    border-radius: 35px;
+    padding-left: 0px;
+    padding-right: 10px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-color: #c6d0e2;
+    /* c4cee1 */
+}
+
+#side-search-btn{
+    position: relative;
+    margin-top: 15px;
+    margin-left: 30px;
+    margin-right: auto;
+    width: 80px;
+    border-radius: 5px;
+    border: 0;
+    background-color: rgb(3, 33, 65);
+    color: white;
+}
+
+option{
+    text-decoration: none !important;
+}
+
+#side-navbar-ul>form{
+    width: 150px;
+}
+#amountOfPeople{
+    width: 80px;
+}
+#numOfRooms{
+    padding-right: 0px;
+    padding-left: 0px;
+}
+.date-input{
+    color: inherit;
+    font-size: 14px;
+}
+.date-input::-webkit-calendar-picker-indicator{
+    cursor: pointer;
+    opacity: 0.6;
+}
+.date-input::-webkit-calendar-picker-indicator:hover{
+    opacity: 1;
+}
+#sidebar-form>li{
+margin-bottom: 20px;
+padding-right: 5px;
+}
+#startdate-li{
+    width: 120px;
+}
+#startdate-li>input{
+    padding-left: 0px;
+    width: 108px;
+}
+#landing-page-img{
+    background-image: url('/public/media/stockImages/landing-page-img.jpg');
+    
+}
+
+
+
 
 
 @media screen and (min-width: 320px) and (max-width: 991px) {
-
+    main{
+        width: 100%;
+    }
     #hotels-link:active{
         background-color: rgb(38, 38, 40) !important;
     color: white !important;
@@ -166,6 +263,81 @@ background: linear-gradient(45deg, rgb(242, 241, 241) 20%, rgb(189, 189, 189) 45
     }
     #search-form{
         margin-top: 10px;
+    }
+
+    #carouselExampleAutoplaying{
+        margin-left: auto;
+        margin-right: auto;
+        width: 430px;
+        
+    }
+
+    #side-navbar{
+        position: relative;
+        left: 0;
+        top: 0px;
+        width: 100%;
+        max-width: 100%;
+        padding: 10px 15px;
+        margin-bottom: 20px;
+        border-radius: 35px;
+        overflow: hidden;
+    }
+    #side-navbar-ul{
+        width: 100%;
+        overflow: hidden;
+        padding: 0;
+        margin: 0;
+    }
+    #sidebar-form{
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        justify-content: flex-start !important;
+        align-items: center !important;
+        width: max-content !important;
+        min-width: 100% !important;
+        gap: 10px !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        scroll-snap-type: x mandatory !important;
+        -webkit-overflow-scrolling: touch !important;
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
+    }
+    #sidebar-form::-webkit-scrollbar{
+        display: none !important;
+    }
+    #sidebar-form>li{
+        margin-bottom: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        flex: 0 0 auto !important;
+        min-width: 140px !important;
+        max-width: 160px !important;
+        display: flex !important;
+        align-items: center !important;
+        scroll-snap-align: start !important;
+    }
+    #sidebar-form>li>select,
+    #sidebar-form>li>input{
+        width: 100% !important;
+        font-size: 14px !important;
+    }
+    #side-search-btn{
+        position: static !important;
+        margin: 0 !important;
+        width: auto !important;
+        min-width: 80px !important;
+        padding: 10px 20px !important;
+        white-space: nowrap !important;
+        flex-shrink: 0 !important;
+        scroll-snap-align: end !important;
+    }
+    .flatpickr-calendar{
+        z-index: 9999 !important;
     }
 }
 
