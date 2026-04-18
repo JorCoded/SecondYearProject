@@ -1511,7 +1511,7 @@
             }
         </style>
     @endif
-    <title></title>
+    <title>Your Choice</title>
 </head>
 
 <body class="d-flex flex-column min-vh-100">

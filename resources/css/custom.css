@@ -195,7 +195,10 @@ padding-right: 5px;
     position:relative;
     left: 68%;
     top: 60px;
-    background-color: black;
+    background-image: url('/public/media/stockImages/landing-page-img.jpg');
+        background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 #landing-page-img2{
     width: 110px;
@@ -203,7 +206,10 @@ padding-right: 5px;
     position:relative;
     left: 81%;
     bottom: 45%;
-    background-color: black;
+    background-image: url('/public/media/stockImages/landing-page-img2.jpg');
+        background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 #landing-page-img3{
     width: 110px;
@@ -211,7 +217,10 @@ padding-right: 5px;
     position:relative;
     left: 81%;
     bottom: 38%;
-    background-color: black;
+    background-image: url('/public/media/stockImages/pexels-jess-vide-4319890.jpg');
+        background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 

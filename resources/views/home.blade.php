@@ -72,7 +72,7 @@
 
     
     <div id="welcome-msg">
-        <h1>Welcome to "website name"</h1>
+    <h1><span>Your Choice</span>, The best destinations at lower price!</h1>
         <h2></h2>
         <p></p>
         
