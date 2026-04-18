@@ -4,6 +4,8 @@ namespace App\Models;
 
 //use Illuminate\Support\Facades\DB;
 use App\Models\Promotion;
+use App\Models\Hotel;
+use App\Models\RoomType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,12 +25,22 @@ class Room extends Model
 
     public function test()
     {
-        return null;
+
     }
 
     public function promotions()
     {
         return $this->belongsToMany(Promotion::class);
+    }
+
+    public function hotel()
+    {
+        return $this->belongsTo(Hotel::class, 'hotelid');
+    }
+
+    public function roomType()
+    {
+        return $this->belongsTo(RoomType::class, 'typeid');
     }
 
     public function scopeWithActivePromotion($query)

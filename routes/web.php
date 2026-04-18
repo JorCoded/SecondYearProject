@@ -2,13 +2,14 @@
 
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'dashboard')
+Route::get('/', [DashboardController::class, 'index'])
 ->name('dashboard');
 
 Route::get('/users', [UserController::class,'index'])
