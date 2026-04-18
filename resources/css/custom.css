@@ -6,6 +6,7 @@ main{
     width: 80%;
     margin-left: auto;
     margin-right: auto;
+    box-shadow: 0px 15px 25px  rgb(68, 198, 189);
 }
 .custom-grey{
     background-color: rgb(38, 38, 40) !important;
@@ -98,9 +99,9 @@ main{
 
 #carouselExampleAutoplaying{
     position: relative;
-    /* left: 570px; */
+    left: 35%;
     bottom: 60px;
-    margin-left: 40%;
+    margin-left: 0px;
     margin-right: auto;
     margin-bottom: 40px;
     width: 490px;
@@ -118,7 +119,7 @@ main{
 
 #side-navbar{
     position: relative;
-    left: 200px;
+    left: 5%;
     top: 220px;
     width: 160px;
     margin-bottom: 40px;
@@ -180,17 +181,51 @@ padding-right: 5px;
     width: 108px;
 }
 #landing-page-img{
-    background-image: url('/public/media/stockImages/landing-page-img.jpg');
-    
+    width: 100%;
+    height: 500px;
+    margin-top: 0px;
+    background-image: url('/public/media/stockImages/landing-page-img4.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+#landing-page-img1{
+    width: 100px;
+    height: 300px;
+    position:relative;
+    left: 68%;
+    top: 60px;
+    background-color: black;
+}
+#landing-page-img2{
+    width: 110px;
+    height: 110px;
+    position:relative;
+    left: 81%;
+    bottom: 45%;
+    background-color: black;
+}
+#landing-page-img3{
+    width: 110px;
+    height: 110px;
+    position:relative;
+    left: 81%;
+    bottom: 38%;
+    background-color: black;
 }
 
 
 
-
+footer{
+    position: relative;
+    /* top: ; */
+}
 
 @media screen and (min-width: 320px) and (max-width: 991px) {
     main{
         width: 100%;
+        margin-top: 40px;
+        overflow-x: hidden;
     }
     #hotels-link:active{
         background-color: rgb(38, 38, 40) !important;
@@ -268,8 +303,11 @@ padding-right: 5px;
     #carouselExampleAutoplaying{
         margin-left: auto;
         margin-right: auto;
+        left: auto;
+        right: auto;
         width: 430px;
-        
+        margin-bottom:0px;
+        margin-top: 100px;
     }
 
     #side-navbar{
@@ -280,6 +318,7 @@ padding-right: 5px;
         max-width: 100%;
         padding: 10px 15px;
         margin-bottom: 20px;
+        margin-top: 40px;
         border-radius: 35px;
         overflow: hidden;
     }
@@ -288,15 +327,16 @@ padding-right: 5px;
         overflow: hidden;
         padding: 0;
         margin: 0;
+        justify-content:center !important;
     }
     #sidebar-form{
         display: flex !important;
         flex-direction: row !important;
         flex-wrap: nowrap !important;
-        justify-content: flex-start !important;
+        justify-content:flex-start !important;
         align-items: center !important;
-        width: max-content !important;
-        min-width: 100% !important;
+        width: min-content !important;
+        /* min-width: 100% !important; */
         gap: 10px !important;
         padding: 0 !important;
         margin: 0 !important;
@@ -329,7 +369,7 @@ padding-right: 5px;
     #side-search-btn{
         position: static !important;
         margin: 0 !important;
-        width: auto !important;
+        width: max-content !important;
         min-width: 80px !important;
         padding: 10px 20px !important;
         white-space: nowrap !important;
@@ -339,6 +379,57 @@ padding-right: 5px;
     .flatpickr-calendar{
         z-index: 9999 !important;
     }
+    #landing-page-img{
+        width: 100%;
+        height: 300px;
+        margin-top: 0px;
+        
+    }
+    #landing-page-img1{
+        width: 65px;
+        height: 190px;
+        margin-top: 0px;
+        left: 67%;
+        background-image: url('/public/media/stockImages/landing-page-img.jpg');
+        background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    display:none
+    }
+    #landing-page-img2{
+        display:none;
+        position: relative;
+        width: 50px;
+        height: 55px;
+        margin-top: 0px;
+        left: 83%;
+        top: -38%;
+        bottom: 0%;
+        background-image: url('/public/media/stockImages/landing-page-img2.jpg');
+        background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    }
+    #landing-page-img3{
+        display:none;
+        width: 50px;
+        height: 70px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        left: 83%;
+        top: -25%;
+        bottom:0;
+        background-image: url('/public/media/stockImages/pexels-jess-vide-4319890.jpg');
+        background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+
+
+    }
+
+
+
+
 }
 
 /* 

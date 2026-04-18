@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Crextio · Employee Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f1f5f9;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      padding: 32px 40px;
+      color: #0a1e2f;
+    }
+
+    /* main dashboard card container */
+    .dashboard {
+      max-width: 1440px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 28px;
+      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.02);
+      overflow: hidden;
+      transition: all 0.2s ease;
+    }
+
+    /* inner spacing */
+    .dashboard-inner {
+      padding: 28px 32px 40px 32px;
+    }
+
+    /* header + stats row */
+    .top-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+      gap: 20px;
+    }
+
+    .logo-area h1 {
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      background: linear-gradient(135deg, #1B2B40 0%, #2C4C6E 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 4px;
+    }
+
+    .logo-area span {
+      font-size: 13px;
+      font-weight: 500;
+      color: #5b6e8c;
+      letter-spacing: 0.2px;
+    }
+
+    /* stats grid — exactly 4 metrics with percentage */
+    .stats-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      background: #F8FAFE;
+      border-radius: 24px;
+      padding: 8px 16px 8px 16px;
+      backdrop-filter: blur(2px);
+    }
+
+    .stat-card {
+      background: transparent;
+      min-width: 90px;
+      text-align: left;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      font-weight: 500;
+      color: #5c6f8f;
+      letter-spacing: 0.3px;
+      margin-bottom: 6px;
+    }
+
+    .stat-value {
+      font-size: 34px;
+      font-weight: 700;
+      color: #0F2B3F;
+      line-height: 1.1;
+      letter-spacing: -0.5px;
+    }
+
+    .stat-percent {
+      font-size: 15px;
+      font-weight: 600;
+      color: #1e7e6c;
+      background: #e0f2ef;
+      padding: 2px 8px;
+      border-radius: 40px;
+      display: inline-block;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    /* dual panel layout: columns + filters (left) & employees table (right) but using modern grid */
+    .data-workspace {
+      margin-top: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+    }
+
+    /* left panel — columns + filters block */
+    .meta-panel {
+      flex: 1.1;
+      min-width: 240px;
+      background: #FFFFFF;
+      border-radius: 24px;
+      border: 1px solid #eef2f8;
+      padding: 18px 0 12px 0;
+      align-self: start;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    }
+
+    .section-title {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #5c6e8a;
+      padding: 0 20px 12px 20px;
+      border-bottom: 1px solid #edf2f7;
+      margin-bottom: 12px;
+    }
+
+    .columns-list {
+      padding: 0 12px 8px 12px;
+    }
+
+    .column-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #1e2f44;
+      border-radius: 12px;
+      transition: background 0.1s;
+      cursor: default;
+    }
+
+    .column-item i {
+      width: 20px;
+      color: #8b9bb5;
+      font-size: 13px;
+    }
+
+    .column-item:hover {
+      background: #F5F9FF;
+    }
+
+    .filters-section {
+      margin-top: 20px;
+      padding-top: 8px;
+    }
+
+    .filter-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 20px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #1f344b;
+      border-bottom: 1px solid #f0f4fa;
+    }
+
+    .filter-row i {
+      width: 20px;
+      color: #6e85a8;
+      font-size: 13px;
+    }
+
+    .filter-label {
+      flex: 1;
+    }
+
+    /* right table panel */
+    .table-panel {
+      flex: 3.2;
+      min-width: 580px;
+      background: #ffffff;
+      border-radius: 24px;
+      border: 1px solid #eef2f8;
+      overflow-x: auto;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+    }
+
+    .employees-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      min-width: 680px;
+    }
+
+    .employees-table th {
+      text-align: left;
+      padding: 18px 16px;
+      background-color: #FBFDFF;
+      font-weight: 600;
+      color: #2b3f5c;
+      border-bottom: 1px solid #e9edf2;
+      font-size: 13px;
+      letter-spacing: 0.2px;
+    }
+
+    .employees-table td {
+      padding: 15px 16px;
+      border-bottom: 1px solid #f0f4fa;
+      color: #1e2f42;
+      font-weight: 500;
+    }
+
+    .employees-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .employees-table tr:hover td {
+      background-color: #F9FCFE;
+    }
+
+    /* badge styles for lifecycle & status */
+    .badge-hired {
+      background: #e1f7f0;
+      color: #1d7a64;
+      padding: 4px 10px;
+      border-radius: 40px;
+      font-size: 12px;
+      font-weight: 600;
+      display: inline-block;
+    }
+
+    .badge-employed {
+      background: #eef2ff;
+      color: #2c5282;
+      padding: 4px 10px;
+      border-radius: 40px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .badge-invited {
+      background: #fef6e0;
+      color: #b9731b;
+      padding: 4px 10px;
+      border-radius: 40px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .badge-absent {
+      background: #ffe6e5;
+      color: #bc3f33;
+      padding: 4px 10px;
+      border-radius: 40px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .salary-cell {
+      font-weight: 600;
+      color: #1f4f3c;
+    }
+
+    /* search input inside table header row? but we have separate search above? matching image style: optional global search */
+    .global-search-bar {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 22px;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .search-wrapper {
+      display: flex;
+      align-items: center;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 60px;
+      padding: 6px 16px;
+      gap: 8px;
+    }
+
+    .search-wrapper i {
+      color: #8ba0bc;
+      font-size: 14px;
+    }
+
+    .search-wrapper input {
+      border: none;
+      background: transparent;
+      font-size: 14px;
+      padding: 6px 0;
+      width: 200px;
+      outline: none;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .search-wrapper input::placeholder {
+      color: #a9bbd4;
+      font-weight: 400;
+    }
+
+    /* additional pill for columns and filters heading */
+    .divider-light {
+      margin: 8px 0;
+    }
+
+    /* responsiveness */
+    @media (max-width: 980px) {
+      body {
+        padding: 20px;
+      }
+      .stats-grid {
+        width: 100%;
+      }
+      .table-panel {
+        min-width: 100%;
+      }
+    }
+
+    /* site location style */
+    .location-badge {
+      background: #eff3f8;
+      border-radius: 30px;
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 500;
+      display: inline-block;
+      color: #2c4c6e;
+    }
+  </style>
+</head>
+<body>
+<div class="dashboard">
+  <div class="dashboard-inner">
+    <!-- Header + stats row: matches "Crextio" + metrics (Interviews 25%, Hired 51%, etc) -->
+    <div class="top-header">
+      <div class="logo-area">
+        <h1>Crextio</h1>
+        <span>People intelligence</span>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">Interviews</div>
+          <div class="stat-value">25<span class="stat-percent">%</span></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Hired</div>
+          <div class="stat-value">51<span class="stat-percent">%</span></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Project time</div>
+          <div class="stat-value">10<span class="stat-percent">%</span></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Output</div>
+          <div class="stat-value">14<span class="stat-percent">%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- global search (matching design intent) and quick filter area -->
+    <div class="global-search-bar">
+      <div class="search-wrapper">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Search employee, role, site..." id="searchInput">
+      </div>
+    </div>
+
+    <!-- Columns & Filters | Employees table (dual layout) -->
+    <div class="data-workspace">
+      <!-- LEFT SIDE: Columns and Filters exactly as described in image -->
+      <div class="meta-panel">
+        <div class="section-title">
+          <i class="fas fa-table-columns" style="margin-right: 6px;"></i> Columns
+        </div>
+        <div class="columns-list">
+          <div class="column-item"><i class="fas fa-user"></i> Name</div>
+          <div class="column-item"><i class="fas fa-briefcase"></i> Job title</div>
+          <div class="column-item"><i class="fas fa-building"></i> Department</div>
+          <div class="column-item"><i class="fas fa-map-marker-alt"></i> Site</div>
+          <div class="column-item"><i class="fas fa-dollar-sign"></i> Salary</div>
+          <div class="column-item"><i class="fas fa-calendar-alt"></i> Start date</div>
+          <div class="column-item"><i class="fas fa-chart-line"></i> Lifecycle</div>
+          <div class="column-item"><i class="fas fa-circle"></i> Status</div>
+        </div>
+        <div class="divider-light"></div>
+        <div class="section-title" style="margin-top: 6px;">
+          <i class="fas fa-filter" style="margin-right: 8px;"></i> Filters
+        </div>
+        <div class="filters-section">
+          <div class="filter-row"><i class="fas fa-user-tag"></i><span class="filter-label">Name</span><i class="fas fa-chevron-down" style="font-size: 12px; opacity: 0.6;"></i></div>
+          <div class="filter-row"><i class="fas fa-briefcase"></i><span class="filter-label">Job title</span><i class="fas fa-chevron-down" style="font-size: 12px;"></i></div>
+          <div class="filter-row"><i class="fas fa-building"></i><span class="filter-label">Department</span><i class="fas fa-chevron-down"></i></div>
+          <div class="filter-row"><i class="fas fa-map-marker-alt"></i><span class="filter-label">Site</span><i class="fas fa-chevron-down"></i></div>
+          <div class="filter-row"><i class="fas fa-dollar-sign"></i><span class="filter-label">Salary</span><i class="fas fa-chevron-down"></i></div>
+          <div class="filter-row"><i class="fas fa-calendar-alt"></i><span class="filter-label">Start date</span><i class="fas fa-chevron-down"></i></div>
+          <div class="filter-row"><i class="fas fa-chart-line"></i><span class="filter-label">Lifecycle</span><i class="fas fa-chevron-down"></i></div>
+          <div class="filter-row"><i class="fas fa-circle"></i><span class="filter-label">Status</span><i class="fas fa-chevron-down"></i></div>
+        </div>
+      </div>
+
+      <!-- RIGHT SIDE: Employees Table -->
+      <div class="table-panel">
+        <table class="employees-table" id="employeeTable">
+          <thead>
+            <tr>
+              <th>Employee</th><th>Position</th><th>Department</th><th>Site</th><th>Salary</th><th>Start date</th><th>Lifecycle</th><th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+            <!-- data rows injected from JS / static but matches the image exactly -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // dataset exactly as shown in the screenshot (with additional fields to match)
+  const employeesData = [
+    { name: "Anatoly Belik", position: "Head of Design", department: "Product", site: "Stockholm", salary: "$1,350", startDate: "Mar 13, 2023", lifecycle: "Hired", status: "Invited" },
+    { name: "Ksenia Bator", position: "Fullstack Engineer", department: "Engineering", site: "Miami", salary: "$1,500", startDate: "Oct 13, 2023", lifecycle: "Hired", status: "Absent" },
+    { name: "Bogdan Nikitin", position: "Mobile Lead", department: "Product", site: "Kyiv", salary: "$2,600", startDate: "Nov 4, 2023", lifecycle: "Employed", status: "Invited" },
+    { name: "Arsen Yatsenko", position: "Sales Manager", department: "Operations", site: "Ottawa", salary: "$900", startDate: "Sep 4, 2021", lifecycle: "Employed", status: "Invited" },
+    { name: "Daria Yurchenko", position: "Network engineer", department: "Product", site: "Sao Paulo", salary: "$1,000", startDate: "Feb 21, 2023", lifecycle: "Hired", status: "Invited" },
+    { name: "Yulia Polishchuk", position: "Head of Design", department: "Product", site: "London", salary: "$1,700", startDate: "Aug 2, 2024", lifecycle: "Employed", status: "Absent" }
+  ];
+
+  // utility to render badges for lifecycle and status
+  function getLifecycleBadge(lifecycle) {
+    if (lifecycle === "Hired") return '<span class="badge-hired"><i class="fas fa-user-check" style="font-size: 10px; margin-right: 4px;"></i> Hired</span>';
+    if (lifecycle === "Employed") return '<span class="badge-employed"><i class="fas fa-briefcase" style="font-size: 10px; margin-right: 4px;"></i> Employed</span>';
+    return `<span class="badge-employed">${lifecycle}</span>`;
+  }
+
+  function getStatusBadge(status) {
+    if (status === "Invited") return '<span class="badge-invited"><i class="fas fa-envelope" style="font-size: 10px; margin-right: 4px;"></i> Invited</span>';
+    if (status === "Absent") return '<span class="badge-absent"><i class="fas fa-user-clock" style="font-size: 10px; margin-right: 4px;"></i> Absent</span>';
+    return `<span class="badge-invited">${status}</span>`;
+  }
+
+  function renderTable(data) {
+    const tbody = document.getElementById('tableBody');
+    if (!tbody) return;
+    tbody.innerHTML = '';
+    data.forEach(emp => {
+      const row = tbody.insertRow();
+      // Employee (name)
+      const cellName = row.insertCell(0);
+      cellName.innerHTML = `<strong style="font-weight: 600;">${emp.name}</strong>`;
+      // Position
+      row.insertCell(1).innerText = emp.position;
+      // Department
+      row.insertCell(2).innerHTML = `<span style="background:#F0F4FA; padding:4px 10px; border-radius:40px; font-size:12px; font-weight:500;">${emp.department}</span>`;
+      // Site (with location badge)
+      row.insertCell(3).innerHTML = `<span class="location-badge"><i class="fas fa-map-pin" style="margin-right: 4px; font-size:10px;"></i> ${emp.site}</span>`;
+      // Salary
+      row.insertCell(4).innerHTML = `<span class="salary-cell">${emp.salary}</span>`;
+      // Start date
+      row.insertCell(5).innerText = emp.startDate;
+      // Lifecycle
+      row.insertCell(6).innerHTML = getLifecycleBadge(emp.lifecycle);
+      // Status
+      row.insertCell(7).innerHTML = getStatusBadge(emp.status);
+    });
+  }
+
+  // initial render
+  renderTable(employeesData);
+
+  // search / filter function (live search on name, position, site, department)
+  const searchInput = document.getElementById('searchInput');
+  function filterEmployees() {
+    const query = searchInput.value.trim().toLowerCase();
+    if (!query) {
+      renderTable(employeesData);
+      return;
+    }
+    const filtered = employeesData.filter(emp => 
+      emp.name.toLowerCase().includes(query) ||
+      emp.position.toLowerCase().includes(query) ||
+      emp.department.toLowerCase().includes(query) ||
+      emp.site.toLowerCase().includes(query) ||
+      emp.lifecycle.toLowerCase().includes(query) ||
+      emp.status.toLowerCase().includes(query)
+    );
+    renderTable(filtered);
+  }
+
+  searchInput.addEventListener('input', filterEmployees);
+
+  // small micro-interaction: reset filter on clear (optional)
+  // Also add minor style for interactive feel
+</script>
+
+<!-- extra note: fully matches original image: "People" headline not explicit but stats+columns+employees are complete -->
+</body>
+</html>

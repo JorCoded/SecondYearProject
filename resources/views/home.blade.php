@@ -1,7 +1,6 @@
 <x-components.common-layout>
     <title>Home</title>
 
-    <h1>Home</h1>
 
     {{-- @if (Auth::guard('customer')->check() || Auth::guard('staff')->check())
      Hello {{ Auth::guard('staff')->user()->firstname}} 
@@ -48,8 +47,8 @@
         <a href="{{ route('hotels') }}">Hotels</a><br>
         <br><a href="{{ route('logout') }}">Log out</a>
     @else
-        <h1 class="">Guest</h1>
-        <br><a href="{{ route('login') }}">Sign In</a><br>
+        {{-- <h1 class="">Guest</h1>
+        <br><a href="{{ route('login') }}">Sign In</a><br> --}}
     @endauth
     {{-- <br><a href="{{ route('signin') }}">Sign In</a><br> --}}
 
@@ -76,6 +75,7 @@
         <h1>Welcome to "website name"</h1>
         <h2></h2>
         <p></p>
+        
     </div>
 
     <div id="side-navbar" class="">
@@ -99,7 +99,7 @@
                 <li class="nav-item mx-2 px-2 rounded-border" id="startdate-li">
 
                     <input type="text" placeholder="Select Date" class="nav-link form-control date-input"
-                        name="startDate" id="start-date-input">
+                        name="startDate" id="start-date-input" required>
                 </li>
                 
                 <li class="nav-item justify-content-center mx-2 px-2 rounded-border">

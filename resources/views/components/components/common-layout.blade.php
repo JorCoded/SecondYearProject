@@ -1509,7 +1509,6 @@
                 inherits: false;
                 initial-value: ""
             }
-        
         </style>
     @endif
     <title></title>
@@ -1541,7 +1540,7 @@
                 @elseauth('customer')
                     <a href="#profile" class="navbar-brand" id="profile-pic"><img src="" alt="Profile"></a>
                 @endauth
-               
+
 
                 <a id="brand" class="navbar-brand" href="home.html">
                     <img src="" alt="logo image" style="width: auto" />
@@ -1556,10 +1555,12 @@
 
                     <form id="search-form" class="d-flex" action="" method="POST">
                         <input class="form-control me-2" type="text" placeholder="Destinations...">
-                        <button id="search-button" class="btn btn-primary bg-dark border-dark" type="button">Search</button>
+                        <button id="search-button" class="btn btn-primary bg-dark border-dark"
+                            type="button">Search</button>
                     </form>
 
-                    <ul class="navbar-nav " style="background-color: rgb(221, 230, 230); border-radius: 50px; position: relative; left:90px">
+                    <ul class="navbar-nav "
+                        style="background-color: rgb(221, 230, 230); border-radius: 50px; position: relative; left:90px">
                         <li class="nav-item mx-2 px-2 rounded-border">
                             <a id="hotels-link" class="nav-link " href="#hotels.html">Hotels</a>
                         </li>
@@ -1585,15 +1586,12 @@
                 </div>
             </div>
 
-            {{-- <div id="bread-crumb-menu" class="col">
-                    <div id="links">
-                        <ul>
-                            <li><a href="home.html">Home</a></li>
+            <div id="bread-crumb-menu" class="">
 
-                        </ul>
-                    </div>
-                </div> --}}
+            </div>
+
         </nav>
+       
         {{-- </div> --}}
     </header>
 
@@ -1605,14 +1603,18 @@
 
     <footer class="py-3 mt-auto white">
         <ul class="nav justify-content-center mb-1">
-            <li class="nav-item"><a href="facebook.com" class="nav-link px-2 text-muted"><i class="bi bi-facebook" style="font-size: 1.5rem;"></i></a></li>
-            <li class="nav-item"><a href="x.com" class="nav-link px-2 text-muted"><i class="bi bi-twitter-x" style="font-size: 1.5rem;"></i></a></li>
-            <li class="nav-item"><a href="instagram.com" class="nav-link px-2 text-muted"><i class="bi bi-instagram" style="font-size: 1.5rem;"></i></a></li>
-            <li class="nav-item"><a href="linkedin.com" class="nav-link px-2 text-muted"><i class="bi bi-linkedin" style="font-size: 1.5rem;"></i></a></li>
-            
-            </ul>
+            <li class="nav-item"><a href="facebook.com" class="nav-link px-2 text-muted"><i class="bi bi-facebook"
+                        style="font-size: 1.5rem;"></i></a></li>
+            <li class="nav-item"><a href="x.com" class="nav-link px-2 text-muted"><i class="bi bi-twitter-x"
+                        style="font-size: 1.5rem;"></i></a></li>
+            <li class="nav-item"><a href="instagram.com" class="nav-link px-2 text-muted"><i class="bi bi-instagram"
+                        style="font-size: 1.5rem;"></i></a></li>
+            <li class="nav-item"><a href="linkedin.com" class="nav-link px-2 text-muted"><i class="bi bi-linkedin"
+                        style="font-size: 1.5rem;"></i></a></li>
+
+        </ul>
         <ul class="nav justify-content-center mb-3">
-            <li class="nav-item"><a href="{{route('dashboard')}}" class="nav-link px-2 text-muted">Home</a></li>
+            <li class="nav-item"><a href="{{ route('dashboard') }}" class="nav-link px-2 text-muted">Home</a></li>
             <li class="nav-item"><a href="#about.html" class="nav-link px-2 text-muted">About</a></li>
             <li class="nav-item"><a href="#contactUs.html" class="nav-link px-2 text-muted">Contact Us</a></li>
             <li class="nav-item"><a href="#ourteam.html" class="nav-link px-2 text-muted">Our Team</a></li>
