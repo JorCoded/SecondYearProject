@@ -1,4 +1,4 @@
-SELECT * FROM hotel;
+SELECT * FROM customer;
 --SELECT DISTINCT location FROM hotel;
 --ALTER TABLE customer ALTER COLUMN logTime timestamp without time zone[] NULL;
 --ALTER TABLE booking ALTER COLUMN "roomid" TYPE int[];

@@ -63,6 +63,23 @@
                             </div>
 
                             <div class="row mb-3">
+                                <label for="profile_pic"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Profile Picture') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="profile_pic" type="file"
+                                        class="form-control @error('profile_pic') is-invalid @enderror" name="profile_pic"
+                                        value="">
+
+                                    @error('profile_pic')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
                                 <label for="phoneNumber"
                                     class="col-md-4 col-form-label text-md-end">{{ __('Phone Number') }}</label>
 

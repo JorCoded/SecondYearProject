@@ -9,7 +9,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [DashboardController::class, 'index'])
+Route::get('/dashboard', [DashboardController::class, 'index'])
 ->name('dashboard');
 
 Route::get('/users', [UserController::class,'index'])
@@ -36,7 +36,7 @@ Route::post('/storeHotel', [HotelController::class, 'storeHotel'])
 Route::post('/storeImage', [HotelController::class, 'uploadImage'])
 ->name('uploadImage');
 
-Route::get('/home', [UserController::class, 'home'])
+Route::get('/', [UserController::class, 'home'])
 ->name('home');
 
 Route::get('/signin', [UserController::class, 'signInPage'])
@@ -53,6 +53,8 @@ Route::post('/signIn', [UserController::class, 'signIn'])
 
 Route::get('/logout', [UserController::class, 'logOut'])
 ->name('logout');
+
+
 
 //Opens up the bookingForm page
 Route::get('/book/{hotelid}', [BookingController::class, 'book'])
@@ -76,5 +78,19 @@ Route::get('post/{id}', function($id){
 });
 #Route::post('/test1/{hotelid})
 Auth::routes();
+
+Route::view('/login', 'auth/login')
+->name('login');
+
+Route::get('/makeAdmin/{userEmail}', [StaffController::class, 'makeAdmin'])
+->name('makeAdmin');
+
+Route::get('/removeAdmin/{userEmail}', [StaffController::class, 'removeAdmin'])
+->name('removeAdmin');
+
+Route::get('/deleteStaff/{userEmail}', [StaffController::class, 'deleteStaff'])
+->name('deleteStaff');
+
+
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -7,6 +7,7 @@ use App\Models\Staff;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 use PhpParser\Node\Stmt\TryCatch;
 
 class StaffController extends Controller
@@ -18,7 +19,13 @@ class StaffController extends Controller
             'firstname' => 'required|max:100',
             'lastname' => 'required|max:100',
             'email' => 'required|email|max:150',
-            'password' => 'required|max:200|min:6',
+            'password' => ['required', 'confirmed',
+                        Password::min(6)
+                        ->letters()
+                        ->mixedCase()
+                        ->numbers()
+                        // ->symbols()
+            ],
             'phoneNumber' => 'required|max:100',
             'address' => 'required|max:150',
             'profile_pic' => 'nullable|image|max:10000',

@@ -67,7 +67,7 @@ class UserController extends Controller
         if ($customer && Hash::check($request->password, $customer->password)) {
             Auth::guard('customer')->login($customer);
             $request->session()->regenerate();
-            return redirect()->route('home')->with('status', 'Logged in successfully.');
+            return redirect()->route('home')->with('status', 'Logged in successfully. From og login');
         } else if ($staff && Hash::check($request->password . Staff::$pattern, $staff->password)) {
             Auth::guard('staff')->login($staff);
             $request->session()->regenerate();
@@ -152,7 +152,10 @@ class UserController extends Controller
         return redirect()->route('home')->with('status', 'Logged out successfully.');
     }
 
-    
+    public function profile()
+    {
+        return view('userProfile');
+    }
 
 
 

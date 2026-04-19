@@ -72,8 +72,11 @@ class BookingController extends Controller
         //1. Capture booking details from 'hotels'
         //form must contain number of rooms
 
+        $startDate = $request->startDate;
+        $endDate = $request->endDate;
+
+        
         $request->validate([
-            /* 'customer_id' => 'required', */
             'startDate' => 'required',
             'endDate' => 'required',
             'amountOfPeople' => 'required|min:1',
@@ -87,7 +90,6 @@ class BookingController extends Controller
             "amountOfPeople"=>$request->amountOfPeople,
         ]; */
 
-        //$request->startDate = 
 
         if (($this->checkInventory($hotelid, (int) $request->amountOfPeople))<1) {
             return redirect()->route('hotels')->with('status', 'No rooms available. Please try another day.');

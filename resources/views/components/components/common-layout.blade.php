@@ -1535,9 +1535,9 @@
 
             <div class="container-fluid ">
 
-                @auth('staff')
+                @auth('customer')
                     <a href="#profile" class="navbar-brand" id="profile-pic"><img src="" alt="Profile"></a>
-                @elseauth('customer')
+                @elseauth('staff')
                     <a href="#profile" class="navbar-brand" id="profile-pic"><img src="" alt="Profile"></a>
                 @endauth
 
@@ -1578,9 +1578,21 @@
                             </ul>
                         </li>
 
-                        <li class="nav-item mx-2 px-2 rounded-border">
-                            <a id="login-link" class="nav-link" href="{{ route('login') }}">Login</a>
-                        </li>
+                        @auth('customer')
+                            <li class="nav-item mx-2 px-2 rounded-border">
+                                <a id="login-link" class="nav-link" href="{{ route('logout') }}">Logout</a>
+                            </li>
+                        @elseauth('staff')
+                            <li class="nav-item mx-2 px-2 rounded-border">
+                                <a id="login-link" class="nav-link" href="{{ route('logout') }}">Logout</a>
+                            </li>
+                        @else
+                            <li class="nav-item mx-2 px-2 rounded-border">
+                                <a id="login-link" class="nav-link" href="{{ route('login') }}">Login</a>
+                            </li>
+                        @endauth
+
+
                     </ul>
 
                 </div>
@@ -1591,7 +1603,7 @@
             </div>
 
         </nav>
-       
+
         {{-- </div> --}}
     </header>
 

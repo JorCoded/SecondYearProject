@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rules\Password; 
 
 class CustomerController extends Controller
 {
@@ -14,7 +15,13 @@ class CustomerController extends Controller
             'firstname' => 'required|max:100',
             'lastname' => 'required|max:100',
             'email' => 'required|email|max:150',
-            'password' => 'required|max:200|min:6',
+            'password' => ['required', 'confirmed',
+                        Password::min(6)
+                        ->letters()
+                        ->mixedCase()
+                        ->numbers()
+                        // ->symbols()
+            ],/*'required|max:200|min:6'*/
             'phoneNumber' => 'required|max:100',
             'address' => 'required|max:150',
             'profile_pic' => 'nullable|image|max:10000',

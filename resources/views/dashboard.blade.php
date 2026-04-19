@@ -483,9 +483,9 @@
 
             <!-- Tab Navigation -->
             <div class="tab-navigation">
-                <button class="tab-btn active" onclick="switchTab('customers')" id="tab-customers">
+                <a href="#"><button class="tab-btn active" onclick="switchTab('customers')" id="tab-customers">
                     <i class="fas fa-users"></i> Customers
-                </button>
+                </button></a>
                 <button class="tab-btn" onclick="switchTab('staff')" id="tab-staff">
                     <i class="fas fa-user-tie"></i> Staff
                 </button>

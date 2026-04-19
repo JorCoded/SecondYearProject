@@ -30,7 +30,7 @@
 
 
 
-    @auth('staff')
+    {{-- @auth('staff')
         <h4>Staff</h4>
         Hello {{ auth()->guard('staff')->user()->firstname }}
 
@@ -46,10 +46,10 @@
         Hello {{ auth()->guard('customer')->user()->firstname }}
         <a href="{{ route('hotels') }}">Hotels</a><br>
         <br><a href="{{ route('logout') }}">Log out</a>
-    @else
-        {{-- <h1 class="">Guest</h1>
+        
+    @endauth --}}
+    {{-- <h1 class="">Guest</h1>
         <br><a href="{{ route('login') }}">Sign In</a><br> --}}
-    @endauth
     {{-- <br><a href="{{ route('signin') }}">Sign In</a><br> --}}
 
     {{-- <form action="{{ route('testBooking') }}" method="post">

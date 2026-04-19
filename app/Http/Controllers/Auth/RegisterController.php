@@ -28,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/login';
 
     /**
      * Create a new controller instance.
@@ -55,6 +55,7 @@ class RegisterController extends Controller
             'phoneNumber' => ['required', 'string', 'max:100'],
             'address' => ['required', 'string', 'max:150'],
             'dob' => ['required', 'date'],
+            'profile_pic'=>['nullable', 'image', 'max:10000']
         ]);
     }
 
@@ -73,6 +74,7 @@ class RegisterController extends Controller
             'phoneNumber' => $data['phoneNumber'],
             'address' => $data['address'],
             'dob' => $data['dob'],
+            'profile_pic'=>$data['profile_pic']
         ]);
     }
 }
