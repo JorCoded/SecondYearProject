@@ -18,6 +18,13 @@ class HotelController extends Controller
         return view('addHotel');
     }
 
+    public function destinations()
+    {
+        return view('destinations');
+    }
+
+    
+
     public function storeHotel(Request $request)
     {
         

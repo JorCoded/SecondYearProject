@@ -3,6 +3,7 @@
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DestinationsController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\UserController;
@@ -26,6 +27,9 @@ Route::post('/storeCustomer', [CustomerController::class, 'storeCustomer'])
 
 Route::get('/hotels', [HotelController::class, 'index'])
 ->name('hotels');
+
+Route::get('/hotels2',[DestinationsController::class, 'index'])
+->name('hotels2');
 
 Route::get('/addHotel', [HotelController::class, 'addHotel'])
 ->name('addHotel');
@@ -56,6 +60,9 @@ Route::get('/logout', [UserController::class, 'logOut'])
 
 Route::get('/profile', [UserController::class, 'profile'])
 ->name('profile');
+
+Route::get('/destinations', [HotelController::class, 'destinations'])
+->name('destinations');
 
 //Opens up the bookingForm page
 Route::get('/book/{hotelid}/{custid}', [BookingController::class, 'book'])

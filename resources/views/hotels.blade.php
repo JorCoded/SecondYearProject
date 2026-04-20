@@ -1,5 +1,7 @@
-<x-components.common-layout :user="auth()->guard('customer')->user()" ? !null:"auth()->guard('staff')->user()" >
-
+<x-components.common-layout :user="Auth::guard('customer')->user() ?? Auth::guard('staff')->user()">
+@auth('customer')
+{{Auth::guard('customer')->user()->firstname}}
+@endauth
     <div id="hotels-div">
         <h1>Hotels</h1>
         
@@ -9,11 +11,13 @@
                 <h2>{{ $hotel->hotel_name }}</h2>
                 <p>{{ $hotel->description }}</p>
                 <p>{{ $hotel->picture }}</p>
-                <a href="{{route('book',['hotelid' => $hotel->id,'custid' => $user->id])}}">Book</a>
+                <x-book-button :hotelId="$hotel->id" :user="$user ?? null">
+                    Book Now
+                </x-book-button>
             </div><br>
         @endforeach
     </div>
 
-    <a href="{{ route('addHotel') }}">Add Hotel</a>
+    {{-- <a href="{{ route('addHotel') }}">Add Hotel</a> --}}
 
 </x-components.common-layout>

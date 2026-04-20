@@ -1520,6 +1520,8 @@
         <div id="notice">{{ session('status') }}</div>
     @endif
 
+    @props(['user'=>Auth::guard('customer')->user() ?? Auth::guard('staff')->user()])
+
     <header>
         
         <nav class="navbar navbar-expand-lg bg-light ">
@@ -1565,7 +1567,7 @@
                             <a id="hotels-link" class="nav-link " href="{{route('hotels')}}">Hotels</a>
                         </li>
                         <li id="destination-list" class="nav-item mx-2 px-2 rounded-border">
-                            <a id="destination-link" class="nav-link" href="#destinations.html">About</a>
+                            <a id="destination-link" class="nav-link" href="{{route('destinations')}}">Destinations</a>
                         </li>
 
                         <li class="nav-item mx-2 px-2 rounded-border dropdown">

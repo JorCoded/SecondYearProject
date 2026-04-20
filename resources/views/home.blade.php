@@ -65,17 +65,17 @@
 
 
     <div id="landing-page-img">
-        <div id="landing-page-img1" ></div>
+        <div id="landing-page-img1"></div>
         <div id="landing-page-img2"></div>
         <div id="landing-page-img3"></div>
     </div>
 
-    
+
     <div id="welcome-msg">
-    <h1><span>Your Choice</span>, The best destinations at lower price!</h1>
+        <h1><span>Your Choice</span>, The best destinations at lower price!</h1>
         <h2></h2>
         <p></p>
-        
+
     </div>
 
     <div id="side-navbar" class="">
@@ -97,10 +97,11 @@
                     </select>
                 </li>
                 <li class="nav-item mx-2 px-2 rounded-border" id="startdate-li">
+                    <input type="text" placeholder="Select Date" class="nav-link form-control date-input"
+                        name="startDate" id="start-date-input" required>
 
-                    
                 </li>
-                
+
                 <li class="nav-item justify-content-center mx-2 px-2 rounded-border">
                     <select class="nav-link" name="amountOfPeople" id="amountOfPeople" form="bookingForm">
                         <option value="" disabled selected hidden>Guests</option>
