@@ -1,13 +1,11 @@
-<x-components.common-layout>
+<x-components.common-layout :user="auth()->guard('customer')->user()" ? !null:"auth()->guard('staff')->user()">
     <h1>Booking Details</h1>
 
-    <form action="{{route('getDetails',['hotelid' => $hotel->id,'custid' => $user->id])}}">
+    <form action="{{route('getDetails',['hotelid' => $hotelid,'custid' => $userid])}}">
         @csrf
-        <label for="startDate">Start Date</label>
-        <input type="date" name="startDate" id="startDate">
-
-        <label for="endDate">End Date</label>
-        <input type="date" name="endDate" id="endDate">
+        <label for="startDate">Select Date</label>
+        <input type="text" placeholder="Select Date" class="nav-link form-control date-input"
+                        name="startDate" id="start-date-input" required>
 
         <label for="amountOfPeople">Number of people:</label>
         <select name="amountOfPeople" id="amountOfPeople" form="bookingForm">

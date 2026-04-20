@@ -98,8 +98,7 @@
                 </li>
                 <li class="nav-item mx-2 px-2 rounded-border" id="startdate-li">
 
-                    <input type="text" placeholder="Select Date" class="nav-link form-control date-input"
-                        name="startDate" id="start-date-input" required>
+                    
                 </li>
                 
                 <li class="nav-item justify-content-center mx-2 px-2 rounded-border">

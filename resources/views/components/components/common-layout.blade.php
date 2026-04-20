@@ -1521,7 +1521,7 @@
     @endif
 
     <header>
-        {{-- <div id="header-div" class="row container-fluid d-flex"> --}}
+        
         <nav class="navbar navbar-expand-lg bg-light ">
 
             {{-- <div id="search-bar-div" class="col">
@@ -1536,13 +1536,13 @@
             <div class="container-fluid ">
 
                 @auth('customer')
-                    <a href="#profile" class="navbar-brand" id="profile-pic"><img src="" alt="Profile"></a>
+                    <a href="{{route('profile')}}" class="navbar-brand" id="profile-pic"><img src="" alt="Profile"></a>
                 @elseauth('staff')
-                    <a href="#profile" class="navbar-brand" id="profile-pic"><img src="" alt="Profile"></a>
+                    <a href="{{route('profile')}}" class="navbar-brand" id="profile-pic"><img src="" alt="Profile"></a>
                 @endauth
 
 
-                <a id="brand" class="navbar-brand" href="home.html">
+                <a id="brand" class="navbar-brand" href="{{route('home')}}">
                     <img src="" alt="logo image" style="width: auto" />
                 </a>
 
@@ -1562,7 +1562,7 @@
                     <ul class="navbar-nav "
                         style="background-color: rgb(221, 230, 230); border-radius: 50px; position: relative; left:90px">
                         <li class="nav-item mx-2 px-2 rounded-border">
-                            <a id="hotels-link" class="nav-link " href="#hotels.html">Hotels</a>
+                            <a id="hotels-link" class="nav-link " href="{{route('hotels')}}">Hotels</a>
                         </li>
                         <li id="destination-list" class="nav-item mx-2 px-2 rounded-border">
                             <a id="destination-link" class="nav-link" href="#destinations.html">About</a>
@@ -1604,7 +1604,6 @@
 
         </nav>
 
-        {{-- </div> --}}
     </header>
 
 

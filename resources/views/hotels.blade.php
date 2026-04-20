@@ -1,7 +1,4 @@
-<x-components.common-layout>
-
-    <a href="{{ route('home') }}">Home</a><br>
-    <a href="{{ route('dashboard') }}">Dashboard</a><br>
+<x-components.common-layout :user="auth()->guard('customer')->user()" ? !null:"auth()->guard('staff')->user()" >
 
     <div id="hotels-div">
         <h1>Hotels</h1>
@@ -12,12 +9,10 @@
                 <h2>{{ $hotel->hotel_name }}</h2>
                 <p>{{ $hotel->description }}</p>
                 <p>{{ $hotel->picture }}</p>
-                {{-- <a href="{{route('/book',['hotelid' => $hotel->id])}}">Book</a> --}}
+                <a href="{{route('book',['hotelid' => $hotel->id,'custid' => $user->id])}}">Book</a>
             </div><br>
         @endforeach
     </div>
-
-    <a href="{{ route('dashboard') }}">Dashboard</a><br>
 
     <a href="{{ route('addHotel') }}">Add Hotel</a>
 

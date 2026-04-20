@@ -38,7 +38,7 @@ class ProfileCard extends Component
         'phoneNumber' => 'required|string|max:100',
         'address' => 'required|string|max:200',
         'dob' => 'required|date',
-        'avatar' => 'nullable|image|max:2048', // 2MB max
+        'avatar' => 'nullable|image|max:10000', // 10MB max
     ];
 
     public function mount()
@@ -112,17 +112,31 @@ class ProfileCard extends Component
 
     protected function checkForChanges()
     {
-        $current = [
-            'firstname' => $this->firstname,
-            'lastname' => $this->lastname,
-            'email' => $this->email,
-            'phoneNumber' => $this->phoneNumber,
-            'address' => $this->address,
-            'dob' => $this->dob,
-            'avatar' => $this->avatar ? 'changed' : ($this->currentAvatar ?? 'default'),
-        ];
-
-        $this->isDirty = $current != $this->originalValues;
+        // Check each field individually for changes
+        $hasChanges = false;
+        
+        $fields = ['firstname', 'lastname', 'email', 'phoneNumber', 'address', 'dob'];
+        foreach ($fields as $field) {
+            if ($this->$field != $this->originalValues[$field]) {
+                $hasChanges = true;
+                break;
+            }
+        }
+        
+        // Check avatar changes
+        if (!$hasChanges) {
+            $originalAvatar = $this->originalValues['avatar'] ?? null;
+            // If we have a new avatar upload or temp avatar, it's changed
+            if ($this->avatar || $this->tempAvatar) {
+                $hasChanges = true;
+            }
+            // If current avatar changed (e.g., after deletion)
+            elseif ($this->currentAvatar !== $originalAvatar) {
+                $hasChanges = true;
+            }
+        }
+        
+        $this->isDirty = $hasChanges;
         $this->saved = false;
     }
 
@@ -153,7 +167,7 @@ class ProfileCard extends Component
             // Handle avatar upload
             $avatarPath = null;
             if ($this->avatar) {
-                $avatarPath = $this->avatar->store('avatars', 'public');
+                $avatarPath = $this->avatar->store('media\customerPictures', 'public');
                 $this->currentAvatar = Storage::url($avatarPath);
                 $this->avatar = null;
                 $this->tempAvatar = null;

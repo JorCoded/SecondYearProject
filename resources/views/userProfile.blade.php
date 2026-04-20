@@ -1,3 +1,15 @@
-<div>
-    <!-- Live as if you were to die tomorrow. Learn as if you were to live forever. - Mahatma Gandhi -->
-</div>
+<x-components.common-layout>
+    @extends('layouts.app')
+
+
+    
+    <livewire:profile-card/>
+   <style>
+    #app{
+        display: none;
+    }
+   </style>
+       
+    
+
+</x-components.common-layout>

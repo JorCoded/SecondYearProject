@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\BookRooms;
 use App\Models\Booking;
 use App\Models\BookingDetail;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -12,14 +13,15 @@ class BookingController extends Controller
 {
     use BookRooms;
 
-    public function test($hotelid){
+    public function test($hotelid)
+    {
 
         $inventory = [
-            'Basic'=> $this->checkInventory($hotelid, 1),
-            'Couple'=> $this->checkInventory($hotelid, 2),
-            'Family'=> $this->checkInventory($hotelid, 3),
-            'Deluxe'=> $this->checkInventory($hotelid, 4),
-            ];
+            'Basic' => $this->checkInventory($hotelid, 1),
+            'Couple' => $this->checkInventory($hotelid, 2),
+            'Family' => $this->checkInventory($hotelid, 3),
+            'Deluxe' => $this->checkInventory($hotelid, 4),
+        ];
         return view('test', ['inventory' => $inventory]);
     }
 
@@ -30,9 +32,9 @@ class BookingController extends Controller
         return view('bookings', ['bookings' => $bookings]);
     }
 
-    public function book(?int $hotelid=1)
+    public function book(?int $hotelid = 1, ?int $custid = 1)
     {
-        return view('bookingForm', ['hotelid' => $hotelid]);
+        return view('bookingForm', ['hotelid' => $hotelid, 'custid' => $custid]);
     }
 
     public function testBooking(Request $request)
@@ -43,12 +45,6 @@ class BookingController extends Controller
         // The number of records for which you want to sum the basePrice.
         $n = 5;
 
-        // Your original query calculates the sum of "basePrice" for ALL rooms with
-        // typeid = 1, and then tries to limit the result. Since an aggregate
-        // function like sum() returns a single row, limit(5) has no effect.
-
-        // The correct approach is to fetch the 'n' records first, then sum their prices.
-        // The pluck() method retrieves only the 'basePrice' for efficiency.
         $price = DB::table('room')
             ->join('room_type', 'room.typeid', '=', 'room_type.id')
             ->where('room.typeid', 1)
@@ -57,13 +53,13 @@ class BookingController extends Controller
             ->pluck('room_type.basePrice') // Get the prices for the first n rooms
             ->sum(); // Sum the prices in the collection
 
-        $startDate = explode('-' ,$request->startDate)[2];
-        $endDate = explode('-' ,$request->endDate)[2];
+        $startDate = explode('-', $request->startDate)[2];
+        $endDate = explode('-', $request->endDate)[2];
         //$endDate = ;
         //$duration = $endDate - $startDate;
-        $duration = explode('-' ,$request->startDate)[2] - explode('-' ,$request->endDate)[2];
+        $duration = explode('-', $request->startDate)[2] - explode('-', $request->endDate)[2];
 
-        return view('test', ['price' => $price, 'startDate'=>$startDate, 'endDate'=>$endDate, 'duration'=>$duration/*, 'rooms'=>$rooms ->basePrice */]);
+        return view('test', ['price' => $price, 'startDate' => $startDate, 'endDate' => $endDate, 'duration' => $duration/*, 'rooms'=>$rooms ->basePrice */]);
     }
 
 
@@ -75,10 +71,9 @@ class BookingController extends Controller
         $startDate = $request->startDate;
         $endDate = $request->endDate;
 
-        
+
         $request->validate([
             'startDate' => 'required',
-            'endDate' => 'required',
             'amountOfPeople' => 'required|min:1',
             'numOfRooms' => 'required|min:1'
 
@@ -91,15 +86,15 @@ class BookingController extends Controller
         ]; */
 
 
-        if (($this->checkInventory($hotelid, (int) $request->amountOfPeople))<1) {
+        if (($this->checkInventory($hotelid, (int) $request->amountOfPeople)) < 1) {
             return redirect()->route('hotels')->with('status', 'No rooms available. Please try another day.');
         }
 
-        return $this->displayPayment($request,$hotelid,$custid);
+        return $this->displayPayment($request, $hotelid, $custid);
     }
 
 
-    public function displayPayment(/* Request $request,  */Request $bookingRequest, $hotelid = 1, $custid = 1)
+    public function displayPayment(Request $bookingRequest, $hotelid = 1, $custid = 1)
     {
         //2. Display details for confirmation and payment
 
@@ -110,12 +105,16 @@ class BookingController extends Controller
             ->limit($bookingRequest->numOfRooms)
             ->pluck('room_type.basePrice') // Get the prices for the first n rooms
             ->sum();
-        $duration = explode('-' ,$bookingRequest->startDate)[2] - explode('-' ,$bookingRequest->endDate)[2];
+        $dates = explode(" to ", $bookingRequest->startDate);
+        $startDate = new DateTime($dates[0]) ?? null;
+        $endDate = new DateTime($dates[1]) ?? null;
+        $duration =  $endDate->diff($startDate)->days;
+
 
         return view('paymentForm', ['bookingRequest' => $bookingRequest, 'totalPrice' => $totalPrice, $hotelid, $duration/* ->basePrice */]);
     }
 
-    public function processPayment(Request $request, $hotelid=1, $custid = 1)
+    public function processPayment(Request $request, $hotelid = 1, $custid = 1)
     {
         //3. Process the payment, if everything is valid then processBooking
         //If payment is successful then processBooking
