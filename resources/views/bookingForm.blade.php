@@ -1,7 +1,7 @@
-<x-components.common-layout :user="auth()->guard('customer')->user()" ? !null:"auth()->guard('staff')->user()">
+<x-components.common-layout :user="Auth::guard('customer')->user() ?? Auth::guard('staff')->user()">
     <h1>Booking Details</h1>
 
-    <form action="{{route('getDetails',['hotelid' => $hotelid,'custid' => $userid])}}">
+    <form method="POST" action="{{route('getDetails',['hotelid' => $hotelid,'custid' => $currentUser->id])}}">
         @csrf
         <label for="startDate">Select Date</label>
         <input type="text" placeholder="Select Date" class="nav-link form-control date-input"
@@ -16,116 +16,7 @@
         </select>
 
 
-        {{-- <table>
-            <thead>
-                <tr>
-                    <th>Room Type</th>
-                    <th>Number of Guests</th>
-                    <th>Price for  Nights</th>
-                    <th>Number of Rooms</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr id="trBasic">
-                    <td>
-                        <div>
-                            <h3>Basic Room</h3>
-                            
-                        </div>
-                    </td>
-                    <td>
-                        <div>
-                            
-                        </div>
-                    </td>
-                    <td>
-                        <div>
-                            
-                        </div>
-                    </td>
-                    <td>
-                        
-                        <div>
-                            
-                        </div>
-                    </td>
-                </tr>
-
-                <tr id="trCouple">
-                    <td>
-                        <div>
-
-                        </div>
-                    </td>
-                    <td>
-                        <div>
-                            
-                        </div>
-                    </td>
-                    <td>
-                        <div>
-                            
-                        </div>
-                    </td>
-                    <td>
-                        
-                        <div>
-                            
-                        </div>
-                    </td>
-                </tr>
-                
-                <tr id="trFamily">
-                    <td>
-                        <div>
-
-                        </div>
-                    </td>
-                    <td>
-                        <div>
-                            
-                        </div>
-                    </td>
-                    <td>
-                        <div>
-                            
-                        </div>
-                    </td>
-                    <td>
-                        
-                        <div>
-                            
-                        </div>
-                    </td>
-                </tr>
-                
-                <tr id="trDeluxe">
-                    <td>
-                        <div>
-
-                        </div>
-                    </td>
-                    <td>
-                        <div>
-                            
-                        </div>
-                    </td>
-                    <td>
-                        <div>
-                            
-                        </div>
-                    </td>
-                    <td>
-                        
-                        <div>
-                            
-                        </div>
-                    </td>
-                </tr>
-                
-            </tbody>
-        </table> --}}
-
+     
         <label for="numOfRooms">How many rooms do you want?</label>
         <!-- <input type="number" name="numOfRooms" id="numberOfRooms"> -->
          <select name="numOfRooms" id="numOfRooms">

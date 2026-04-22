@@ -70,7 +70,7 @@ Route::get('/book/{hotelid}/{custid}', [BookingController::class, 'book'])
 // Route::get('/book/{hotelid?}', [BookingController::class, 'processBooking'])
 // ->name('testBooking');
 
-Route::get('/form/{hotelid}/{custid}', [BookingController::class, 'getDetails'])
+Route::post('/form/{hotelid}/{custid}', [BookingController::class, 'getDetails'])
 ->name('getDetails');
 
 Route::post('/payment/{bookingRequest}/{hotelid}/{custid}', [BookingController::class, 'processPayment'])

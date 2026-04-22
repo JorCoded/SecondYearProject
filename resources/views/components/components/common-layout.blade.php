@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="light">
 
 <head>
     <meta charset="UTF-8">
@@ -1520,10 +1520,10 @@
         <div id="notice">{{ session('status') }}</div>
     @endif
 
-    @props(['user'=>Auth::guard('customer')->user() ?? Auth::guard('staff')->user()])
+    @props(['user' => Auth::guard('customer')->user() ?? Auth::guard('staff')->user()])
 
     <header>
-        
+
         <nav class="navbar navbar-expand-lg bg-light ">
 
             {{-- <div id="search-bar-div" class="col">
@@ -1538,13 +1538,15 @@
             <div class="container-fluid ">
 
                 @auth('customer')
-                    <a href="{{route('profile')}}" class="navbar-brand" id="profile-pic"><img src="" alt="Profile"></a>
+                    <a href="{{ route('profile') }}" class="navbar-brand" id="profile-pic"><img src=""
+                            alt="Profile"></a>
                 @elseauth('staff')
-                    <a href="{{route('profile')}}" class="navbar-brand" id="profile-pic"><img src="" alt="Profile"></a>
+                    <a href="{{ route('profile') }}" class="navbar-brand" id="profile-pic"><img src=""
+                            alt="Profile"></a>
                 @endauth
 
 
-                <a id="brand" class="navbar-brand" href="{{route('home')}}">
+                <a id="brand" class="navbar-brand" href="{{ route('home') }}">
                     <img src="" alt="logo image" style="width: auto" />
                 </a>
 
@@ -1564,10 +1566,11 @@
                     <ul class="navbar-nav "
                         style="background-color: rgb(221, 230, 230); border-radius: 50px; position: relative; left:90px">
                         <li class="nav-item mx-2 px-2 rounded-border">
-                            <a id="hotels-link" class="nav-link " href="{{route('hotels')}}">Hotels</a>
+                            <a id="hotels-link" class="nav-link " href="{{ route('hotels') }}">Hotels</a>
                         </li>
                         <li id="destination-list" class="nav-item mx-2 px-2 rounded-border">
-                            <a id="destination-link" class="nav-link" href="{{route('destinations')}}">Destinations</a>
+                            <a id="destination-link" class="nav-link"
+                                href="{{ route('destinations') }}">Destinations</a>
                         </li>
 
                         <li class="nav-item mx-2 px-2 rounded-border dropdown">
@@ -1598,7 +1601,9 @@
                     </ul>
 
                 </div>
+                
             </div>
+
 
             <div id="bread-crumb-menu" class="">
 

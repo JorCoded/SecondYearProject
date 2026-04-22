@@ -1,0 +1,38 @@
+[
+  {
+    "id": "1",
+    "typeName": "basic",
+    "capacity": "1",
+    "basePrice": 100,
+    "totalRooms": 50,
+    "created_at": null,
+    "updated_at": null
+  },
+  {
+    "id": "2",
+    "typeName": "couple",
+    "capacity": "2",
+    "basePrice": 150,
+    "totalRooms": 50,
+    "created_at": null,
+    "updated_at": null
+  },
+  {
+    "id": "3",
+    "typeName": "family",
+    "capacity": "4",
+    "basePrice": 200,
+    "totalRooms": 50,
+    "created_at": null,
+    "updated_at": null
+  },
+  {
+    "id": "4",
+    "typeName": "deluxe",
+    "capacity": "2",
+    "basePrice": 300,
+    "totalRooms": 50,
+    "created_at": null,
+    "updated_at": null
+  }
+]

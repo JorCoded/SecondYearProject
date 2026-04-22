@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Faker\HotelProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,13 +17,15 @@ class HotelFactory extends Factory
      */
     public function definition(): array
     {
+        $this->faker->addProvider(new HotelProvider($this->faker));
+
         return [
-            'hotel_name' => fake()->company() . ' Hotel',
-            'location' => fake()->city(),
+            'hotel_name' => $this->faker->coolHotel(),
+            'location' => $this->faker->coolLocation(),
             'address' => fake()->address(),
             'phoneNumber' => fake()->phoneNumber(),
             'email' => fake()->unique()->safeEmail(),
-            'picture' => 'test.jpg',
+            'picture' => $this->faker->coolPicture(),
             'description' => fake()->paragraph(),
         ];
     }

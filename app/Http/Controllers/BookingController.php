@@ -66,7 +66,7 @@ class BookingController extends Controller
     public function getDetails(Request $request, ?int $hotelid = 1, ?int $custid = 1)
     {
         //1. Capture booking details from 'hotels'
-        //form must contain number of rooms
+        //form using POST method
 
         $startDate = $request->startDate;
         $endDate = $request->endDate;
@@ -89,6 +89,15 @@ class BookingController extends Controller
         if (($this->checkInventory($hotelid, (int) $request->amountOfPeople)) < 1) {
             return redirect()->route('hotels')->with('status', 'No rooms available. Please try another day.');
         }
+
+        session(['booking_data' => [
+            'startDate' => $startDate,
+            'endDate' => $endDate,
+            'amountOfPeople' => $request->amountOfPeople,
+            'numOfRooms' => $request->numOfRooms,
+            'hotelid' => $hotelid,
+            'custid' => $custid
+        ]]);
 
         return $this->displayPayment($request, $hotelid, $custid);
     }

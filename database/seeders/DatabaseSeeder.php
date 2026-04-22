@@ -16,8 +16,10 @@ class DatabaseSeeder extends Seeder
      * Seed the application's database.
      */
     public function run(): void
-    {
-        for ($i = 38; $i <= 40; $i++) {
+    {   
+        //Hotel::factory(40)->create();
+
+        for ($i = 1; $i <= 40; $i++) {
             // Floor 1 - Type 3
             Room::factory(50)->state(new Sequence(
                 fn(Sequence $sequence) => ['roomNumber' => $sequence->index + 1],
