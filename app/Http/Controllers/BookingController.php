@@ -13,7 +13,7 @@ class BookingController extends Controller
 {
     use BookRooms;
 
-    public function test($hotelid)
+   /*  public function test($hotelid)
     {
 
         $inventory = [
@@ -23,7 +23,7 @@ class BookingController extends Controller
             'Deluxe' => $this->checkInventory($hotelid, 4),
         ];
         return view('test', ['inventory' => $inventory]);
-    }
+    } */
 
 
     public function index()
@@ -63,21 +63,26 @@ class BookingController extends Controller
     }
 
 
-    public function getDetails(Request $request, ?int $hotelid = 1, ?int $custid = 1)
+    public function getDetails(Request $request, ?int $hotelid = 1)
     {
         //1. Capture booking details from 'hotels'
         //form using POST method
 
-        $startDate = $request->startDate;
-        $endDate = $request->endDate;
-
-
+        $userid= app(\App\Services\AuthService::class)->user()->id ?? 1;
         $request->validate([
-            'startDate' => 'required',
+            'startDate' => 'required|date',
             'amountOfPeople' => 'required|min:1',
             'numOfRooms' => 'required|min:1'
 
         ]);
+        $dates = explode(" to ", $request->startDate);
+        $startDate = new DateTime($dates[0]) ?? null;
+        $endDate = new DateTime($dates[1]) ?? null;
+        $duration =  $endDate->diff($startDate)->days;
+        $amountOfPeople = (int) $request->amountOfPeople;
+        $numOfRooms = (int) $request->numOfRooms;
+
+        $availableRooms = $this->checkInventory($hotelid, $amountOfPeople, $startDate, $endDate);
 
         /* $details=[
             "startDate"=>$request->startDate,
@@ -86,41 +91,70 @@ class BookingController extends Controller
         ]; */
 
 
-        if (($this->checkInventory($hotelid, (int) $request->amountOfPeople)) < 1) {
-            return redirect()->route('hotels')->with('status', 'No rooms available. Please try another day.');
+        if ($availableRooms < $numOfRooms) {
+            return redirect()->route('hotels')->with('error', "Only {$availableRooms} rooms available. You requested {$numOfRooms} rooms. Please try another day.");
         }
 
         session(['booking_data' => [
             'startDate' => $startDate,
             'endDate' => $endDate,
+            'duration'=> $duration,
             'amountOfPeople' => $request->amountOfPeople,
             'numOfRooms' => $request->numOfRooms,
             'hotelid' => $hotelid,
-            'custid' => $custid
+            'userid' => $userid,
         ]]);
 
-        return $this->displayPayment($request, $hotelid, $custid);
+        return view('welcome');
+        //return $this->displayPayment($request, $hotelid);
     }
 
 
-    public function displayPayment(Request $bookingRequest, $hotelid = 1, $custid = 1)
+    public function displayPayment(Request $bookingRequest, $hotelid = 1)
     {
         //2. Display details for confirmation and payment
 
-        $totalPrice = DB::table('room')
+        /* $totalPrice = DB::table('room')
             ->join('room_type', 'room.typeid', '=', 'room_type.id')
             ->where('room.typeid', $bookingRequest->amountOfPeople)
             ->orderBy('room.id', 'asc') // Order to get a consistent set of rooms
             ->limit($bookingRequest->numOfRooms)
             ->pluck('room_type.basePrice') // Get the prices for the first n rooms
-            ->sum();
+            ->sum(); 
+        */
         $dates = explode(" to ", $bookingRequest->startDate);
         $startDate = new DateTime($dates[0]) ?? null;
         $endDate = new DateTime($dates[1]) ?? null;
         $duration =  $endDate->diff($startDate)->days;
 
+         $rooms = DB::table('room')
+            ->join('room_type', 'room.typeid', '=', 'room_type.id')
+            ->where('room.hotelid', $hotelid)
+            ->where('room_type.capacity', '>=', $bookingRequest->amountOfPeople)
+            ->whereNotIn('room.id', function($query) use ($bookingRequest) {
+                // Exclude already booked rooms for these dates
+                $query->select('booking_details.roomid')
+                    ->from('booking_details')
+                    ->join('bookings', 'booking_details.bookingid', '=', 'bookings.id')
+                    ->where(function($q) use ($bookingRequest) {
+                        $q->whereBetween('bookings.startDate', [$bookingRequest->startDate, $bookingRequest->endDate])
+                          ->orWhereBetween('bookings.endDate', [$bookingRequest->startDate, $bookingRequest->endDate])
+                          ->orWhere(function($subQ) use ($bookingRequest) {
+                              $subQ->where('bookings.startDate', '<=', $bookingRequest->startDate)
+                                   ->where('bookings.endDate', '>=', $bookingRequest->endDate);
+                          });
+                    });
+            })
+            ->orderBy('room.id', 'asc')
+            ->limit($bookingRequest->numOfRooms)
+            ->get(['room_type.basePrice', 'room.id', 'room.roomNumber']);
 
-        return view('paymentForm', ['bookingRequest' => $bookingRequest, 'totalPrice' => $totalPrice, $hotelid, $duration/* ->basePrice */]);
+        $totalPrice = $rooms->sum('basePrice') * $duration;
+
+        
+
+
+        return view('paymentForm', ['bookingRequest' => $bookingRequest, 'totalPrice' => $totalPrice, 'hotelid'=> $hotelid,'duration'=> $duration, 'rooms'=>$rooms/* ->basePrice */]);
     }
 
     public function processPayment(Request $request, $hotelid = 1, $custid = 1)
@@ -129,10 +163,29 @@ class BookingController extends Controller
         //If payment is successful then processBooking
         //Since not using payment portal or payment logic, a placeholder will be used
 
-        if (true)
-            $this->processBooking($request, $hotelid, $custid);
 
-        //return redirect()->route('bookings');
+        $bookingData = session('booking_data');
+        
+        if (!$bookingData) {
+            return redirect()->route('hotels')
+                ->with('error', 'Booking session expired. Please try again.');
+        }
+
+        // Validate payment data (add your payment fields here)
+        $validated = $request->validate([
+            'payment_method' => 'required|string',
+            'card_number' => 'required_if:payment_method,card',
+        ]);
+
+        // Process payment logic here (not implementing payment logic for project)
+        $paymentSuccessful = true;
+
+        if ($paymentSuccessful) {
+            return $this->processBooking($request, $hotelid, $custid);
+        }
+
+        return redirect()->route('paymentForm')
+            ->with('error', 'Payment failed. Please try again.');
     }
 
 

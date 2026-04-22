@@ -6,9 +6,9 @@ use Illuminate\Support\Facades\DB;
 
 trait BookRooms
 {
-    public function checkInventory(?int $hotelid = 1,?int $typeid = 1)
-    {
-        $inventory = /* DB::select('select count(typeid) from room where "isAvailable" = ? AND "typeid" =? AND "hotelid" = ?', [1, $typeid, $hotelid])[0] */
+    /* public function checkInventory(?int $hotelid = 1,?int $typeid = 1)
+    {// DB::select('select count(typeid) from room where "isAvailable" = ? AND "typeid" =? AND "hotelid" = ?', [1, $typeid, $hotelid])[0]
+        $inventory = 
         DB::table('room')
                 ->where('isAvailable', true)
                 ->where('hotelid', $hotelid)
@@ -16,9 +16,43 @@ trait BookRooms
                 ->count();
         $count = $inventory;
         
-        //return view('test', ['inventory' => $inventory, 'flag' => $count<5?false:true]);
-        return $count/* <5?false:true */;
+        //return view('test', ['inventory' => $inventory, 'flag' => $count<5?false:true]); <5?false:true
+        return $count;
+    } */
+
+    
+        private function checkInventory($hotelid, $typeid, $startDate, $endDate)
+    {
+        return $this->getAvailableRooms($hotelid, $typeid, $startDate, $endDate)->count();
     }
+
+    private function getAvailableRooms($hotelid, $typeid, $startDate, $endDate)
+    {
+        return DB::table('room')
+            ->join('room_type', 'room.typeid', '=', 'room_type.id')
+            ->where('room.hotelid', $hotelid)
+            ->where('room.typeid', $typeid) // Direct comparison with typeid
+            ->whereNotIn('room.id', function($query) use ($startDate, $endDate) {
+                $query->select('booking_details.roomid')
+                    ->from('booking_details')
+                    ->join('bookings', 'booking_details.bookingid', '=', 'bookings.id')
+                    ->where('bookings.bookingStatus', '!=', 'Cancelled')
+                    ->where(function($q) use ($startDate, $endDate) {
+                        // Check for overlapping dates
+                        $q->whereBetween('bookings.startDate', [$startDate, $endDate])
+                          ->orWhereBetween('bookings.endDate', [$startDate, $endDate])
+                          ->orWhere(function($subQ) use ($startDate, $endDate) {
+                              $subQ->where('bookings.startDate', '<=', $startDate)
+                                   ->where('bookings.endDate', '>=', $endDate);
+                          });
+                    });
+            })
+            ->select('room.*', 'room_type.basePrice', 'room_type.name as roomTypeName')
+            ->orderBy('room.id', 'asc')
+            ->get();
+    }
+
+
 
     public function changeAvailability(?int $hotelid = 1,$rooms=[],?int $typeid=1){
         //updates the availability of the rooms booked.

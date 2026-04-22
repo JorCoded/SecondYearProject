@@ -1,11 +1,12 @@
 <x-components.common-layout :user="Auth::guard('customer')->user() ?? Auth::guard('staff')->user()">
     <h1>Booking Details</h1>
 
-    <form method="POST" action="{{route('getDetails',['hotelid' => $hotelid,'custid' => $currentUser->id])}}">
+    <form method="POST" action="{{ route('getDetails',['hotelid' => $hotelid]) }}">
         @csrf
         <label for="startDate">Select Date</label>
         <input type="text" placeholder="Select Date" class="nav-link form-control date-input"
-                        name="startDate" id="start-date-input" required>
+                        name="startDate" id="start-date-input" value="{{ old('startDate') }}" required>
+
 
         <label for="amountOfPeople">Number of people:</label>
         <select name="amountOfPeople" id="amountOfPeople" form="bookingForm">

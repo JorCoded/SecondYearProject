@@ -1517,6 +1517,7 @@
             }
         </style>
     @endif
+    
 </head>
 
 <body
