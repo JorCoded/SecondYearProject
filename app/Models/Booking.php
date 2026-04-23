@@ -10,7 +10,7 @@ class Booking extends Model
     protected $table = 'booking';
 
     protected $fillable = [
-        'customer_id',
+        'custid',
         'room_id',
         'bookingStatus',
         'startDate',

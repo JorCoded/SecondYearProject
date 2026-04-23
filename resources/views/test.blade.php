@@ -6,9 +6,9 @@
     {{-- <h3><a href="{{ route('testBooking', ['hotelid' => 1]) }}">Test Booking</a></h3> --}}
 
     
-    {{ $inventory['Basic'] }}
-    
-    {{-- @dd($inventory) --}}
+    {{-- {{ $inventory['Basic'] }} --}}
+    {{$inventory}}
+    @dd($rooms[0])
 
     <div class="roomTypeCard">
         <div class="typeName">

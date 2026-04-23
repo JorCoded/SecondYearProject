@@ -135,6 +135,7 @@
                     >
                         Cancel
                     </button>
+                    <a href="{{route('bookings')}}" style="text-decoration: none;">Bookings</a>
                     <div class="action-right">
                         @if($saved)
                             <span class="save-indicator">
