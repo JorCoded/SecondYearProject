@@ -483,13 +483,13 @@
 
             <!-- Tab Navigation -->
             <div class="tab-navigation">
-                <a href="#"><button class="tab-btn active" onclick="switchTab('customers')" id="tab-customers">
+                <a href="#customer"><button class="tab-btn active" onclick="switchTab('customers')" id="tab-customers">
                     <i class="fas fa-users"></i> Customers
                 </button></a>
-                <button class="tab-btn" onclick="switchTab('staff')" id="tab-staff">
+                <a href="#users"><button class="tab-btn" onclick="switchTab('staff')" id="tab-staff">
                     <i class="fas fa-user-tie"></i> Staff
-                </button>
-                <button class="tab-btn" onclick="switchTab('hotels')" id="tab-hotels">
+                </button></a>
+                <a href="#hotels"></a><button class="tab-btn" onclick="switchTab('hotels')" id="tab-hotels">
                     <i class="fas fa-hotel"></i> Hotels
                 </button>
                 <button class="tab-btn" onclick="switchTab('rooms')" id="tab-rooms">
@@ -527,7 +527,7 @@
                         <i class="fas fa-cog" style="margin-right: 8px;"></i> Actions
                     </div>
                     <div class="filters-section">
-                        <div class="filter-row" style="cursor: pointer;" onclick="addNewRecord()">
+                        <div id="addNew" class="filter-row" style="cursor: pointer;" onclick="addNewRecord()">
                             <i class="fas fa-plus-circle" style="color: #2c7a7b;"></i>
                             <span class="filter-label"><a href=""
                                     style="text-decoration: none; color: #1f344b;">Add New</a></span>
@@ -942,7 +942,8 @@
             if (tabName=="Customers") {
              const tabName='user';
              const nextPage = "add"+tabName.charAt(0).toUpperCase()+tabName.slice(1);
-             window.location.href("{{route("addUser")}}");
+             const buttonAdd = document.getElementById('addNew');
+                buttonAdd.style.display="none";
             }else if (tabName=='Hotels') {
             const  tabName='hotel';
             const nextPage = "add"+tabName.charAt(0).toUpperCase()+tabName.slice(1);

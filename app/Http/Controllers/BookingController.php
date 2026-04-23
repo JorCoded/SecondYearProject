@@ -160,7 +160,7 @@ class BookingController extends Controller
 
         $bookingData = session('booking_data');
         $userid = $bookingData['userid'];
-        $bookingData['amountOfPeople'] =(int) $bookingRequest->amountOfPeople;
+        $bookingData['amountOfPeople'] = (int) $bookingRequest->amountOfPeople;
         //$hotelid = $bookingData['hotelid'];
 
         /* session(['booking_data'=>[
@@ -201,7 +201,7 @@ class BookingController extends Controller
         */
 
 
-        return view('paymentForm', ['bookingRequest' => $bookingRequest, 'userid' => $userid, 'price' => $this->getRoomPrice($bookingRequest->amountOfPeople), 'totalPrice' => $totalPrice, 'hotelid' => $hotelid, 'duration' => $duration, 'rooms' => $bookingRequest->numOfRooms, 'startDate' => $startDate, 'endDate' => $endDate, 'roomType' => $this->roomType($bookingRequest->amountOfPeople),'amountOfPeople' =>(int) $bookingRequest->amountOfPeople]);
+        return view('paymentForm', ['bookingRequest' => $bookingRequest, 'userid' => $userid, 'price' => $this->getRoomPrice($bookingRequest->amountOfPeople), 'totalPrice' => $totalPrice, 'hotelid' => $hotelid, 'duration' => $duration, 'rooms' => $bookingRequest->numOfRooms, 'startDate' => $startDate, 'endDate' => $endDate, 'roomType' => $this->roomType($bookingRequest->amountOfPeople), 'amountOfPeople' => (int) $bookingRequest->amountOfPeople]);
     }
 
     public function processPayment(Request $request, ?int $hotelid = 1)
@@ -232,7 +232,7 @@ class BookingController extends Controller
         $paymentSuccessful = true;
 
         if ($paymentSuccessful) {
-            return $this->processBooking($request, $hotelid, $userid,$request->amountOfPeople);
+            return $this->processBooking($request, $hotelid, $userid, $request->amountOfPeople);
         }
 
         return redirect()->route('paymentForm')
@@ -283,24 +283,31 @@ class BookingController extends Controller
         //return $this->processPayment($request);
     }
 
-    public function displayBookings(){
+    public function displayBookings()
+    {
         $userid = app(\App\Services\AuthService::class)->user()->id ?? 1;
 
         $bookings = DB::table('booking')
-                ->where('booking.custid', $userid)
-                ->get();
+            ->where('booking.custid', $userid)
+            ->get();
+
         $bookingDetails = [];
-        foreach($bookings as $booking)
-        {
-            $bookingDetails[] = DB::table('booking_details')
-                    ->where('booking_details.id',$booking->id)
-                    ->get();
+        foreach ($bookings as $booking) {
+            $details = DB::table('booking_details')
+                ->where('booking_details.id', $booking->id)
+                ->get(); // Use first() instead of get() if it's a one-to-one relationship
 
+
+            // Merge booking and detail data
+            $bookingDetails[] = (object) array_merge(
+                (array) $booking,
+                (array) $details
+            );
         }
-        
 
-    return view('bookings',['bookings' => $bookings, 'bookingDetails' => $bookingDetails]);
+        $now = new DateTime();
 
+
+        return view('bookings', ['bookings' => $bookings, 'bookingDetails' => $bookingDetails, 'now' => $now]);
     }
-
 }

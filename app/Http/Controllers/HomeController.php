@@ -25,7 +25,7 @@ class HomeController extends Controller
     public function index()
     {
         $trendingHotels = Hotel::all();
-        return view('home');
+        return view('home',['trendingHotels' => $trendingHotels]);
     }
 
     

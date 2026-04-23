@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Session;
-use DateTime;
-use App\Models\Staff;
 use App\Models\Customer;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+use App\Models\Hotel;
+use App\Models\Staff;
+use DateTime;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Session;
 
 class UserController extends Controller
 {
@@ -35,9 +36,9 @@ class UserController extends Controller
         // Auth::user() defaults to the 'web' guard. Since you are using 'customer' and 'staff' guards,
         // you need to explicitly retrieve the user from the active guard.
         $user = Auth::guard('customer')->user() ?? Auth::guard('staff')->user();
-        
+        $trendingHotels = Hotel::all();
 
-        return view('home', ['user' => $user]);
+        return view('home', ['user' => $user, 'trendingHotels' => $trendingHotels]);
     }
 
     public function signInPage()

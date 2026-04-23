@@ -1,68 +1,8 @@
 <x-components.common-layout>
     <title>Home</title>
 
-
-    {{-- @if (Auth::guard('customer')->check() || Auth::guard('staff')->check())
-     Hello {{ Auth::guard('staff')->user()->firstname}} 
-     <br><a href="{{ route('logout')}}">Log out</a>
-
-
-    @else
-        <a href="{{ route('dashboard') }}">Dashboard</a><br>
-        <a href="{{ route('signin') }}">Sign In</a><br>
-        <a href="{{ route('logout')}}">Log out</a>
-    @endif 
-
-    @auth('staff')
-        Hello {{$user->firstname}}
-
-        @if ($user->is_admin)
-            <br><a href="{{ route('dashboard') }}">Dashboard</a>
-        @endif
-        
-        <br><a href="{{ route('logout')}}">Log out</a>
-    @endauth
-
-    @auth('customer')
-        Hello {{$user->firstname}}
-        <br><a href="{{ route('logout')}}">Log out</a>
-    @endauth --}}
-
-
-
-    {{-- @auth('staff')
-        <h4>Staff</h4>
-        Hello {{ auth()->guard('staff')->user()->firstname }}
-
-        @if (auth()->guard('staff')->user()->is_admin)
-            <br><a href="{{ route('dashboard') }}">Dashboard</a><br>
-        @endif
-
-        <a href="{{ route('hotels') }}">Hotels</a><br>
-
-        <br><a href="{{ route('logout') }}">Log out</a>
-    @elseauth('customer')
-        <h1>Customer</h1>
-        Hello {{ auth()->guard('customer')->user()->firstname }}
-        <a href="{{ route('hotels') }}">Hotels</a><br>
-        <br><a href="{{ route('logout') }}">Log out</a>
-        
-    @endauth --}}
-    {{-- <h1 class="">Guest</h1>
-        <br><a href="{{ route('login') }}">Sign In</a><br> --}}
-    {{-- <br><a href="{{ route('signin') }}">Sign In</a><br> --}}
-
-    {{-- <form action="{{ route('testBooking') }}" method="post">
-        @csrf
-        <label for="startDate">Start Date</label>
-        <input type="date" name="startDate" id="startDate">
-
-        <label for="endDate">End Date</label>
-        <input type="date" name="endDate" id="endDate" />
-
-        <button type="submit">Submit</button>
-    </form> --}}
-
+{{-- @dd($trendingHotels) --}}
+   
 
     <div id="landing-page-img">
         <div id="landing-page-img1"></div>
@@ -71,10 +11,10 @@
     </div>
 
 
-    <div id="welcome-msg">
+    <div id="welcome-msg" style="padding: 20px">
         <h1><span>Your Choice</span>, The best destinations at lower price!</h1>
-        <h2></h2>
-        <p></p>
+        <h2></h2><br>
+        <p>Your Choice is a leading provider of innovative hotel booking and reservation management solutions, empowering hospitality businesses worldwide to streamline operations, maximize revenue, and deliver exceptional guest experiences. Our cloud-based platform seamlessly integrates with existing property management systems, global distribution channels, and direct booking engines to create a unified, real-time ecosystem for inventory control, rate management, and guest communications. With intuitive interfaces designed for both hotel staff and travelers, advanced analytics for data-driven decision-making, and 24/7 technical support</p>
 
     </div>
 
@@ -117,7 +57,7 @@
             </form>
         </ul>
     </div>
-
+    <div style="display: none"></div>
 
     <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
@@ -125,24 +65,24 @@
             <div class="carousel-item active" id="card-div">
                 <div class="d-flex justify-content-around">
                     <div class="card" style="width: 10rem;">
-                        <img src="..." class="card-img-top" alt="...">
+                        <img src="{{$trendingHotels[0]->picture}}" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">Card 1</h5>
-                            <p class="card-text">Content description.</p>
+                            <h5 class="card-title">{{$trendingHotels[0]->hotel_name}}</h5>
+                            <p class="card-text"></p>
                         </div>
                     </div>
                     <div class="card" style="width: 10rem;">
-                        <img src="..." class="card-img-top" alt="...">
+                        <img src="{{$trendingHotels[33]->picture}}" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">Card 2</h5>
-                            <p class="card-text">Content description.</p>
+                            <h5 class="card-title">{{$trendingHotels[33]->hotel_name}}</h5>
+                            <p class="card-text"></p>
                         </div>
                     </div>
                     <div class="card" style="width: 10rem;">
-                        <img src="..." class="card-img-top" alt="...">
+                        <img src="{{$trendingHotels[6]->picture}}" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">Card 3</h5>
-                            <p class="card-text">Content description.</p>
+                            <h5 class="card-title"{{$trendingHotels[6]->hotel_name}}</h5>
+                            <p class="card-text"></p>
                         </div>
                     </div>
                     <!-- Repeat cards for Slide 1 -->
@@ -154,24 +94,24 @@
                 <div class="d-flex justify-content-around">
 
                     <div class="card" style="width: 10rem;">
-                        <img src="..." class="card-img-top" alt="...">
+                        <img src="{{$trendingHotels[17]->picture}}" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">Card 4</h5>
-                            <p class="card-text">Content description.</p>
+                            <h5 class="card-title">{{$trendingHotels[17]->hotel_name}}</h5>
+                            <p class="card-text"></p>
                         </div>
                     </div>
                     <div class="card" style="width: 10rem;">
-                        <img src="..." class="card-img-top" alt="...">
+                        <img src="{{$trendingHotels[3]->picture}}" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">Card 5</h5>
-                            <p class="card-text">Content description.</p>
+                            <h5 class="card-title">{{$trendingHotels[3]->hotel_name}}</h5>
+                            <p class="card-text"></p>
                         </div>
                     </div>
                     <div class="card" style="width: 10rem;">
-                        <img src="..." class="card-img-top" alt="...">
+                        <img src="{{$trendingHotels[9]->picture}}" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">Card 6</h5>
-                            <p class="card-text">Content description.</p>
+                            <h5 class="card-title">{{$trendingHotels[9]->hotel_name}}</h5>
+                            <p class="card-text"></p>
                         </div>
                     </div>
 
@@ -182,24 +122,24 @@
                 <div class="d-flex justify-content-around">
 
                     <div class="card" style="width: 10rem;">
-                        <img src="..." class="card-img-top" alt="...">
+                        <img src="{{$trendingHotels[10]->picture}}" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">Card 7</h5>
-                            <p class="card-text">Content description.</p>
+                            <h5 class="card-title">{{$trendingHotels[10]->hotel_name}}</h5>
+                            <p class="card-text"></p>
                         </div>
                     </div>
                     <div class="card" style="width: 10rem;">
-                        <img src="..." class="card-img-top" alt="...">
+                        <img src="{{$trendingHotels[11]->picture}}" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">Card 8</h5>
-                            <p class="card-text">Content description.</p>
+                            <h5 class="card-title">{{$trendingHotels[11]->hotel_name}}</h5>
+                            <p class="card-text"></p>
                         </div>
                     </div>
                     <div class="card" style="width: 10rem;">
-                        <img src="..." class="card-img-top" alt="...">
+                        <img src="{{$trendingHotels[39]->picture}}" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">Card 9</h5>
-                            <p class="card-text">Content description.</p>
+                            <h5 class="card-title">{{$trendingHotels[39]->hotel_name}}</h5>
+                            <p class="card-text"></p>
                         </div>
                     </div>
 
