@@ -1,4 +1,4 @@
-SELECT * FROM staff;
+SELECT * FROM hotel;
 --SELECT DISTINCT location FROM hotel;
 --ALTER TABLE customer ALTER COLUMN logTime timestamp without time zone[] NULL;
 --ALTER TABLE booking ALTER COLUMN "roomid" TYPE int[];
@@ -8,7 +8,7 @@ SELECT * FROM staff;
 --ALTER TABLE booking_details RENAME COLUMN "id" TO "bookingid";
 --ALTER TABLE hotels RENAME TO "hotel";
 --ALTER TABLE customer ADD CONSTRAINT unique_customer_email UNIQUE (email)
---TRUNCATE TABLE public.staff RESTART IDENTITY CASCADE
+--TRUNCATE TABLE public.customer RESTART IDENTITY CASCADE
 --UPDATE room SET "isAvailable" = false WHERE "hotelid" = 1 AND  "typeid" = 1 ;
 --select * from room where hotelid = 1 AND  "isAvailable"= FALSE AND typeid = 1 order by id limit 2
 --INSERT INTO public.room_type("typeName","capacity","basePrice","totalRooms") VALUES ('basic', 1, 100, 50);

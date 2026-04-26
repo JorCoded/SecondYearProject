@@ -5,10 +5,12 @@ namespace App\Models;
 use Laravel\Scout\Searchable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableInterface;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Customer extends Authenticatable implements AuthenticatableInterface
 {
     use Searchable;
+    use HasFactory;
 
     protected $table = 'customer';
 
@@ -19,7 +21,6 @@ class Customer extends Authenticatable implements AuthenticatableInterface
         'password',
         'phoneNumber',
         'address',
-        'credCardNum',
         'profile_pic',
         'dob'
     ];
